@@ -1,0 +1,4 @@
+# Do not format JS as it is transpiled from TS
+**/*.js
+**/*.jsx
+node_modules

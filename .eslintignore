@@ -1,0 +1,7 @@
+node_modules
+# Only typescript code is to be linted
+*.js
+# Output folder
+out
+# Do not lint declaration files
+*.d.ts
