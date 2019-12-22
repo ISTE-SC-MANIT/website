@@ -1,6 +1,11 @@
 import React from "react";
 const Index: React.FunctionComponent = () => {
-    return null;
+    return 
+    (
+        <div>
+            change2
+        <div/>
+    )
 };
 
 Index.displayName = "IndexPage";
