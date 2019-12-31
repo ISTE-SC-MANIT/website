@@ -1,0 +1,140 @@
+html, body {
+    margin: 0;
+    // height: 100%;
+    width: fit-content;
+}
+
+
+.Home{
+    background-image: url(/static/banner_bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    margin-left: -200px;
+    margin-top: 50px;
+    
+}
+.banner_home{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-left: 15%;
+}
+.text_home{
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    margin-left: auto;
+}
+.headtext{
+    font-size: 45px;
+}
+.homeimg1 img,.homeimg2 img,.homeimg3 img{
+ height: 65%;
+ width: 70%;
+ position: relative;
+ }
+ .image_home{
+     width: 40%;
+     margin-left: 5%;
+     margin-top:5%;
+    
+ }
+ .homeimg2 img{
+     left:8%;
+     top:-150px;
+ }
+ .homeimg3 img{
+    left:16%;
+    top:-300px;
+}
+.logo_home img{
+    border-radius: 50%;
+    border-width: 5px;
+    border-color: white;
+    margin-top: 170px;
+    margin-right:10x;
+    width: 150px;
+    height: 150px;
+}
+@media only screen and (max-width: 1460px) {
+    .image_home{
+        margin-left: 5%;
+    }
+   
+  }
+  @media only screen and (max-width: 1460px) {
+    .image_home{
+        display:none;
+    }
+    .Home{
+        padding-bottom: 200px;
+        margin-left: 0px;
+    }
+    .banner_home{
+        width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    
+   
+  }
+  @media only screen and (max-width: 1460px) {
+    .headtext{
+        font-size: 30px;
+    }
+    .logo_home img{
+        margin-top: 150px;
+        margin-right:10x;
+        width: 120px;
+        height: 120px;
+    }
+    .Home{
+        margin-left: -150px;
+        padding-bottom: 480px;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .banner_home{
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .headtext{
+        font-size: 20px;
+    }
+    .logo_home img{
+        margin-top: 150px;
+        margin-right:10x;
+        width: 80px;
+        height: 80px;
+    }
+    .text_home p{
+        font-size: 15px;
+    }
+   
+  }
+  @media only screen and (max-width: 500px) {
+    .banner_home{
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .logo_home img{
+        margin-top: 150px;
+        margin-right:10x;
+        width: 70px;
+        height: 70px;
+    }
+    .text_home p{
+        font-size: 10px;
+    }
+    .headtext{
+        font-size: 15px;
+    }
+   
+   
+  }
