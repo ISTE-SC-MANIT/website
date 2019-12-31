@@ -15,9 +15,9 @@ const index = () =>{
                 <title>ISTE MANIT TEAM</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 
-                {/* <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet"></link> */}
+                
                 <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"></link>
-                {/* <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /> */}
+                
                 <link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet"></link> 
                 <link href="https://fonts.googleapis.com/css?family=Noto+Sans:600&display=swap" rel="stylesheet"></link>
                 <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet"></link>
