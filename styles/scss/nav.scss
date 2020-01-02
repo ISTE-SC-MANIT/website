@@ -1,0 +1,27 @@
+body{
+    margin:0px;
+}
+
+.Navbar .navitems{
+    color: white;
+    font-family: 'Roboto Condensed', sans-serif;
+    margin:10px;
+}
+.snav{
+    width: 50%;
+    margin: auto;
+    height: 50%;
+    
+    
+}
+.Navbar{
+    background-color: #0AB6FF;
+    height: 60px;
+    position: fixed;
+    z-index: 9999 !important;
+    width: 100%;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.05);
+    top: 0;
+    background-color: #0ab6ff;
+    
+}

@@ -1,0 +1,52 @@
+.togglenav2{
+    display:none;
+
+    
+}
+.Navbar{
+    background-color: #0AB6FF;
+    height: 60px;
+    position: fixed;
+    z-index: 9999 !important;
+    width: 100%;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.05);
+    top: 0;
+    background-color: #0ab6ff;
+    left:0
+}
+.snav{
+    width: 50%;
+    margin: auto;
+    height: 50%;
+    
+    
+    
+}
+.Menu1{
+    color: white;
+}
+.Nav2 Button{
+    color:white;
+    font-family: 'Noto Sans', sans-serif;
+    padding: 10px;
+    margin:10px;
+}
+.Nav2{
+    width: 630px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media only screen and (max-width: 1000px) {
+    .togglenav2{
+        display:block;
+        margin-top: 12px;
+       width: 20px;
+       margin-left: -100px;
+        
+    }
+    .Nav2{
+        display: none;
+    }
+   
+  }
