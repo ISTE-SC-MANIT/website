@@ -48,7 +48,7 @@ class MyDocument extends Document {
 
     render() {
         return (
-            <HTML>
+            <HTML lang="en">
                 <Head>
                     <meta charSet="utf-8" />
                 </Head>
