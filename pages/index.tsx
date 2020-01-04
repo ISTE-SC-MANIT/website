@@ -1,8 +1,9 @@
+import { NextPage } from "next";
 import React from "react";
+import Section1 from "../components/index/section1";
 
-const Index: React.FunctionComponent = () => {
-    return null;
+const Index: NextPage = () => {
+    return <Section1 />;
 };
 
-Index.displayName = "IndexPage";
 export default Index;
