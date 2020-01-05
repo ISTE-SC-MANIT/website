@@ -5,7 +5,6 @@
 import Document, { Html as HTML, Head, Main, NextScript } from "next/document";
 import ServerStyleSheets from "@material-ui/styles/ServerStyleSheets";
 import React from "react";
-import theme from "../components/theme";
 
 class MyDocument extends Document {
     static async getInitialProps(ctx) {
@@ -51,6 +50,13 @@ class MyDocument extends Document {
             <HTML lang="en">
                 <Head>
                     <meta charSet="utf-8" />
+                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                    <style>
+                        {`html, body{
+                            margin: 0;
+                            padding: 0;
+                        }`}
+                    </style>
                 </Head>
                 <body>
                     <Main />

@@ -16,9 +16,6 @@ module.exports = {
         node: true,
         jest: true
     },
-    rules: {
-        "react/prop-types": [0]
-    },
     settings: {
         react: {
             createClass: "createReactClass", // Regex for Component Factory to use,
