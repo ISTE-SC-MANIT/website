@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
         textAlign: "center"
     },
     section: {
-        backgroundImage: `url(${"/static/event6.jpg"})`,
+        backgroundImage: `url(${"/index/event6.jpg"})`,
         backgroundAttachment: "fixed",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -69,7 +69,7 @@ const useStyles = makeStyles(theme => ({
 export default function FontSizeTheme() {
     const classes = useStyles();
     return (
-        <div className={classes.section}>
+        <div className={classes.section} id="Events">
             <ThemeProvider theme={theme}>
                 <div className={classes.head}>
                     <br></br>
@@ -92,7 +92,7 @@ export default function FontSizeTheme() {
                             <CardActionArea>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/static/version.jpg"
+                                    image="/index/version.jpg"
                                     title="Version Beta"
                                 />
                                 <CardContent>
@@ -129,7 +129,7 @@ export default function FontSizeTheme() {
                             <CardActionArea>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/static/chimera.jpg"
+                                    image="/static/chimerax.jpg"
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>
@@ -168,7 +168,7 @@ export default function FontSizeTheme() {
                             <CardActionArea>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/static/codathon.jpg"
+                                    image="/index/codathon.jpg"
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>
@@ -207,7 +207,7 @@ export default function FontSizeTheme() {
                             <CardActionArea>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/static/megatreopuz.jpg"
+                                    image="/index/megatreopuz.jpg"
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>
@@ -245,7 +245,7 @@ export default function FontSizeTheme() {
                             <CardActionArea>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/static/Anubhuti.jpg"
+                                    image="/index/Anubhuti.jpg"
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>
@@ -283,7 +283,7 @@ export default function FontSizeTheme() {
                             <CardActionArea>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/static/social.jpg"
+                                    image="/index/joyride.jpg"
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>
@@ -323,7 +323,7 @@ export default function FontSizeTheme() {
                             <CardActionArea>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/static/goonj.jpg"
+                                    image="/index/goonj.jpg"
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>

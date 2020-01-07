@@ -2,7 +2,7 @@ import React from "react";
 import createMuiTheme, { Theme } from "@material-ui/core/styles/createMuiTheme";
 import { ThemeProvider } from "@material-ui/core";
 import { useRouter } from "next/router";
-import Header from "../components/header";
+import Header from "../components/header1";
 const MyApp = ({
     Component,
     pageProps

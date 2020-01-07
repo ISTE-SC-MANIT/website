@@ -5,30 +5,19 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => {
     return {
-        container: {
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "1rem",
-
-            [theme.breakpoints.down("sm")]: {
-                padding: "8rem"
-            }
-        },
         root: {
-            backgroundImage: `url(${"/static/banner_bg.png"})`,
-            marginLeft: "-200px",
-            paddingBottom: "60px"
-            // marginTop: "-380px"
+            backgroundImage: `url(${"/banner_bg.png"})`,
+            marginLeft: "-300px",
+            paddingBottom: "0px",
+            marginTop: "-230px",
+            height: "1020px"
         },
         heading: {
             color: "white",
-            marginLeft: "250px"
+            marginLeft: "250px",
+            marginTop: "230px"
         },
-        fp: {
-            paddingTop: "35rem",
-            paddingBottom: "15rem"
-        },
+
         image1: {
             width: "400px",
             height: "300px",
@@ -49,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => {
             left: "100px"
         },
         imgcontainer: {
-            marginTop: "50px",
+            marginTop: "300px",
             background: "transparent",
             border: "null",
             marginLeft: "50px"
@@ -58,18 +47,27 @@ const useStyles = makeStyles((theme: Theme) => {
             marginTop: "190px",
             textAlign: "center"
         },
+        heading1: {
+            color: "white",
+            marginLeft: "250px"
+        },
         [theme.breakpoints.down("sm")]: {
             grid2: {
                 display: "none"
             },
             root: {
-                paddingBottom: "40vh",
                 marginTop: "00px",
-                marginLeft: "-400px"
+                marginLeft: "-400px",
+                height: "100vh"
             },
             heading: {
                 marginLeft: "400px",
-                padding: "10px"
+                padding: "10px",
+                marginTop: "20px"
+            },
+            heading1: {
+                marginLeft: "400px",
+                padding: "5px"
             }
         }
     };
@@ -79,7 +77,7 @@ const Section1: React.FC = () => {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
+        <div className={classes.root} id="Home">
             <Grid container spacing={0}>
                 <Grid item xs={12} sm={6} lg={8} className={classes.grid1}>
                     <Typography
@@ -89,7 +87,10 @@ const Section1: React.FC = () => {
                     >
                         ISTE SC MANIT
                     </Typography>
-                    <Typography variant="subtitle1" className={classes.heading}>
+                    <Typography
+                        variant="subtitle1"
+                        className={classes.heading1}
+                    >
                         The best Students,s Chapter from last 3 years in MP-CG
                         region
                     </Typography>

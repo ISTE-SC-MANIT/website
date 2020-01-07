@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
 export default function FontSizeTheme() {
     const classes = useStyles();
     return (
-        <div className={classes.section}>
+        <div className={classes.section} id="Contact">
             <ThemeProvider theme={theme}>
                 <div className={classes.head}>
                     <br></br>
