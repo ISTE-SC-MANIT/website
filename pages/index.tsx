@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import React from "react";
+
 import Section1 from "../components/index/section1";
 import Section2 from "../components/index/section2";
 import Section3 from "../components/index/section3";

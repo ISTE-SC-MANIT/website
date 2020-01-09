@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import clsx from "clsx";
-import ReactNode from "react";
 import {
     makeStyles,
     useTheme,
@@ -26,9 +25,6 @@ import HomeIcon from "@material-ui/icons/Home";
 import InfoIcon from "@material-ui/icons/Info";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import GroupIcon from "@material-ui/icons/Group";
-import ImageIcon from "@material-ui/icons/Image";
 
 const drawerWidth = 240;
 
@@ -91,10 +87,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function PersistentDrawerLeft() {
-    const { route } = useRouter();
-
-    const first = route.split("/")[1];
-    console.log(first);
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -106,24 +98,6 @@ export default function PersistentDrawerLeft() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    const [Title, setTitle] = useState("ISTE SC MANIT");
-    const [Icon1, setIcon1] = useState("Events");
-    const [Icon2, setIcon2] = useState("Team");
-    const [Icon3, setIcon3] = useState("Gallery");
-
-    React.useEffect(() => {
-        switch (first) {
-            case "":
-                break;
-            case "chimera": {
-                setTitle("Chimera");
-                setIcon1("Prizes");
-                setIcon2("Why ?");
-                setIcon3("FAQs");
-                break;
-            }
-        }
-    }, [first]);
 
     return (
         <div className={classes.root}>
@@ -147,9 +121,8 @@ export default function PersistentDrawerLeft() {
                     >
                         <MenuIcon />
                     </IconButton>
-
                     <Typography variant="h6" noWrap>
-                        {Title}
+                        ISTE SC MANIT
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -194,23 +167,7 @@ export default function PersistentDrawerLeft() {
                             <ListItemIcon>
                                 <EmojiEventsIcon />
                             </ListItemIcon>
-                            <ListItemText primary={Icon1} />
-                        </ListItem>
-                    </Link>
-                    <Link href="#Events">
-                        <ListItem button>
-                            <ListItemIcon>
-                                <GroupIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={Icon2} />
-                        </ListItem>
-                    </Link>
-                    <Link href="#Events">
-                        <ListItem button>
-                            <ListItemIcon>
-                                <ImageIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={Icon3} />
+                            <ListItemText primary="Events" />
                         </ListItem>
                     </Link>
                     <Link href="#Contact">

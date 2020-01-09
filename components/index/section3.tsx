@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     },
     card: {
         margin: "50px",
-        height: "480px"
+        height: "500px"
     },
     img: {
         // width:"40%",
@@ -59,6 +59,7 @@ const useStyles = makeStyles(theme => ({
     media: {
         height: 250
     },
+
     [theme.breakpoints.down("sm")]: {
         media: {
             height: 200
@@ -76,7 +77,7 @@ export default function FontSizeTheme() {
                     <Typography
                         variant="h3"
                         style={{
-                            color: "Black",
+                            color: "inherit",
                             textAlign: "center",
                             marginTop: "90px"
                         }}
@@ -118,8 +119,12 @@ export default function FontSizeTheme() {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button size="small" color="primary">
-                                    View Website
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.button}
+                                >
+                                    view website
                                 </Button>
                             </CardActions>
                         </Card>
@@ -157,8 +162,12 @@ export default function FontSizeTheme() {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button size="small" color="primary">
-                                    VIEW WEBSITE
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.button}
+                                >
+                                    view website
                                 </Button>
                             </CardActions>
                         </Card>
@@ -196,8 +205,12 @@ export default function FontSizeTheme() {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button size="small" color="primary">
-                                    VIEW WEBSITE
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.button}
+                                >
+                                    view website
                                 </Button>
                             </CardActions>
                         </Card>
@@ -234,8 +247,12 @@ export default function FontSizeTheme() {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button size="small" color="primary">
-                                    VIEW WEBSITE
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.button}
+                                >
+                                    view website
                                 </Button>
                             </CardActions>
                         </Card>
@@ -272,8 +289,12 @@ export default function FontSizeTheme() {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button size="small" color="primary">
-                                    VIEW WEBSITE
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.button}
+                                >
+                                    view website
                                 </Button>
                             </CardActions>
                         </Card>
@@ -312,8 +333,8 @@ export default function FontSizeTheme() {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button size="small" color="primary">
-                                    VIEW WEBSITE
+                                <Button variant="contained" color="primary">
+                                    view website
                                 </Button>
                             </CardActions>
                         </Card>
@@ -352,8 +373,12 @@ export default function FontSizeTheme() {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button size="small" color="primary">
-                                    VIEW WEBSITE
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.button}
+                                >
+                                    view website
                                 </Button>
                             </CardActions>
                         </Card>

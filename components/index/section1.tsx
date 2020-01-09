@@ -99,19 +99,19 @@ const Section1: React.FC = () => {
                     <div className={classes.imgcontainer}>
                         <div>
                             <img
-                                src="/static/version.jpg"
+                                src="/index/version.jpg"
                                 className={classes.image1}
                             ></img>
                         </div>
                         <div>
                             <img
-                                src="/static/chimerax.jpg"
+                                src="/index/chimerax.jpg"
                                 className={classes.image2}
                             ></img>
                         </div>
                         <div>
                             <img
-                                src="/static/codathon.jpg"
+                                src="/index/codathon.jpg"
                                 className={classes.image3}
                             ></img>
                         </div>

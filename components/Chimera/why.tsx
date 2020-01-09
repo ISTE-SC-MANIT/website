@@ -115,11 +115,7 @@ export default function FontSizeTheme() {
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="primary">
-                                    view website
-                                </Button>
-                            </CardActions>
+                            <CardActions></CardActions>
                         </Card>
                     </Grid>
                     <Grid item xs={12} sm={6} lg={4}>
@@ -151,11 +147,7 @@ export default function FontSizeTheme() {
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="primary">
-                                    View WEbsite
-                                </Button>
-                            </CardActions>
+                            <CardActions></CardActions>
                         </Card>
                     </Grid>
                     <Grid item xs={12} sm={6} lg={4}>
@@ -189,11 +181,7 @@ export default function FontSizeTheme() {
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="primary">
-                                    View WEbsite
-                                </Button>
-                            </CardActions>
+                            <CardActions></CardActions>
                         </Card>
                     </Grid>
                 </Grid>
