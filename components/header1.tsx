@@ -89,12 +89,15 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     })
 );
-
+let Title: React.ReactNode;
+let Icon1: React.ReactNode;
+let Icon2: React.ReactNode;
+let Icon3: React.ReactNode;
 export default function PersistentDrawerLeft() {
     const { route } = useRouter();
 
     const first = route.split("/")[1];
-    console.log(first);
+
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -106,24 +109,27 @@ export default function PersistentDrawerLeft() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    const [Title, setTitle] = useState("ISTE SC MANIT");
-    const [Icon1, setIcon1] = useState("Events");
-    const [Icon2, setIcon2] = useState("Team");
-    const [Icon3, setIcon3] = useState("Gallery");
 
     React.useEffect(() => {
         switch (first) {
             case "":
+                Title = "ISTE SC MANIT ";
+                Icon1 = "Events";
+                Icon2 = "Team";
+                Icon3 = "Gallery";
                 break;
             case "chimera": {
-                setTitle("Chimera");
-                setIcon1("Prizes");
-                setIcon2("Why ?");
-                setIcon3("FAQs");
+                Title = "Chimera";
+                console.log(Title);
+
+                Icon1 = "Prizes";
+                Icon2 = "Why ?";
+                Icon3 = "FAQs";
                 break;
             }
         }
     }, [first]);
+    console.log(Title);
 
     return (
         <div className={classes.root}>
@@ -149,7 +155,7 @@ export default function PersistentDrawerLeft() {
                     </IconButton>
 
                     <Typography variant="h6" noWrap>
-                        {Title}
+                        <>{Title}</>
                     </Typography>
                 </Toolbar>
             </AppBar>
