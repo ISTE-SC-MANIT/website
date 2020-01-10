@@ -52,13 +52,25 @@ export default function About() {
                         </div>
                         <Typography variant="subtitle1">
                             <p>
-                            Codathon is an Inter NIT coding contest conducted by the Indian Society for Technical Education Students Chapter MANIT under CHIMERA our annual students conclave.
-
-The contest that follows the most intriguing design of 7 days and 7 questions is the perfect place to test, learn and improve your coding skills. Codathon is carefully designed in a way so it proves 
-as a learning platform irrespective of your coding background. Newcomers can start, Intermediates can improve and professionals have a chance to compete with the best in the country.
-
-Other than the exposure, Codathon provides certificates and cash prizes to the top coders among the NITs and adds a great deal to your resume to make it shine amongst the rest. All these specialities add up making CODATHON an extraordinary coding event setting it apart from the mainstream coding contests.
-
+                                Codathon is an Inter NIT coding contest
+                                conducted by the Indian Society for Technical
+                                Education Students Chapter MANIT under CHIMERA
+                                our annual students conclave. The contest that
+                                follows the most intriguing design of 7 days and
+                                7 questions is the perfect place to test, learn
+                                and improve your coding skills. Codathon is
+                                carefully designed in a way so it proves as a
+                                learning platform irrespective of your coding
+                                background. Newcomers can start, Intermediates
+                                can improve and professionals have a chance to
+                                compete with the best in the country. Other than
+                                the exposure, Codathon provides certificates and
+                                cash prizes to the top coders among the NITs and
+                                adds a great deal to your resume to make it
+                                shine amongst the rest. All these specialities
+                                add up making CODATHON an extraordinary coding
+                                event setting it apart from the mainstream
+                                coding contests.
                             </p>
                         </Typography>
                     </Paper>

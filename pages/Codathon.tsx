@@ -11,10 +11,10 @@ import Prices from "../components/codathon/Prices";
 
 const Codathon: NextPage = () => {
     return (
-         <div>
-             <Home/>
-             <About/>
-             <Prices/>
+        <div>
+            <Home />
+            <About />
+            <Prices />
         </div>
     );
 };

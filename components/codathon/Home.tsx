@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme: Theme) => {
         },
         root: {
             backgroundImage: `url(${"/static/ab.jpg"})`,
-           
+
             marginLeft: "-200px",
-            height:"600px",
+            height: "600px",
             paddingBottom: "30px"
             // marginTop: "-380px"
         },
@@ -88,16 +88,29 @@ const Home: React.FC = () => {
                         variant="h3"
                         component="h2"
                         className={classes.heading}
-                        style={{background:"orange",
-                                top:"-40px",position:"relative"}}
+                        style={{
+                            background: "orange",
+                            top: "-40px",
+                            position: "relative"
+                        }}
                     >
                         Codathon
                     </Typography>
-                    <Typography variant="subtitle1" className={classes.heading}  style={{background:"black",
-                                top:"-40px",position:"relative",textAlign:"center",padding:"6px"}}>
-                        Coding contest
-                        Codathon is an Inter NIT coding contest conducted by the Indian Society for Technical 
-                        Education Students Chapter MANIT under CHIMERA, our annual students conclave. 
+                    <Typography
+                        variant="subtitle1"
+                        className={classes.heading}
+                        style={{
+                            background: "black",
+                            top: "-40px",
+                            position: "relative",
+                            textAlign: "center",
+                            padding: "6px"
+                        }}
+                    >
+                        Coding contest Codathon is an Inter NIT coding contest
+                        conducted by the Indian Society for Technical Education
+                        Students Chapter MANIT under CHIMERA, our annual
+                        students conclave.
                     </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} lg={4} className={classes.grid2}>
