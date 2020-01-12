@@ -133,7 +133,7 @@ export default function PersistentDrawerLeft() {
                     <ListItem>
                         <Avatar alt="Remy Sharp" src="/logo.png" />
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <Typography variant="h6">ISTE SC MANIT</Typography>
+                        <Typography variant="h6">Chimera-X</Typography>
                     </ListItem>
                 </Toolbar>
             </AppBar>
@@ -178,7 +178,7 @@ export default function PersistentDrawerLeft() {
                             <ListItemIcon>
                                 <EmojiEventsIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Events" />
+                            <ListItemText primary="prizes" />
                         </ListItem>
                     </Link>
                     <Link href="#Events">
@@ -186,7 +186,7 @@ export default function PersistentDrawerLeft() {
                             <ListItemIcon>
                                 <GroupIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Team" />
+                            <ListItemText primary="Why ?" />
                         </ListItem>
                     </Link>
                     <Link href="#Events">
@@ -194,7 +194,7 @@ export default function PersistentDrawerLeft() {
                             <ListItemIcon>
                                 <ImageIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Gallery" />
+                            <ListItemText primary="FAQs" />
                         </ListItem>
                     </Link>
                     <Link href="#Contact">

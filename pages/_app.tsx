@@ -44,7 +44,7 @@ const MyApp = ({
     return (
         <ThemeProvider theme={theme}>
             {/* Add header here */}
-            <Header />
+
             <Component {...pageProps} />
             {/* Add footer here */}
         </ThemeProvider>

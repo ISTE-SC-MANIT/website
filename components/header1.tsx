@@ -29,6 +29,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import GroupIcon from "@material-ui/icons/Group";
 import ImageIcon from "@material-ui/icons/Image";
+import Avatar from "@material-ui/core/Avatar";
 
 const drawerWidth = 240;
 
@@ -120,7 +121,6 @@ export default function PersistentDrawerLeft() {
                 break;
             case "chimera": {
                 Title = "Chimera";
-                console.log(Title);
 
                 Icon1 = "Prizes";
                 Icon2 = "Why ?";
@@ -129,7 +129,6 @@ export default function PersistentDrawerLeft() {
             }
         }
     }, [first]);
-    console.log(Title);
 
     return (
         <div className={classes.root}>
@@ -154,9 +153,11 @@ export default function PersistentDrawerLeft() {
                         <MenuIcon />
                     </IconButton>
 
-                    <Typography variant="h6" noWrap>
-                        <>{Title}</>
-                    </Typography>
+                    <ListItem>
+                        <Avatar alt="Remy Sharp" src="/logo.png" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <Typography variant="h6">ISTE SC MANIT</Typography>
+                    </ListItem>
                 </Toolbar>
             </AppBar>
             <Drawer

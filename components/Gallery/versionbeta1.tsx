@@ -11,10 +11,9 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingTop: "200px"
         },
         paper: {
-            padding: theme.spacing(5),
+            padding: theme.spacing(10),
             textAlign: "center",
-            color: theme.palette.text.secondary,
-            marginTop: "70px"
+            color: theme.palette.text.secondary
         },
         paper1: {
             padding: theme.spacing(2),
@@ -24,23 +23,15 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         image: {
             width: "90%",
-            height: "350px",
-            borderRadius: "5%"
+            height: "460px"
         },
         heading: {
-            color: "black"
-        },
-        abouthead: {
-            margin: "auto",
-            width: "350px"
+            color: "black",
+            paddingBottom: "70px"
         },
         [theme.breakpoints.down("sm")]: {
             root: {
                 paddingTop: "200px"
-            },
-            abouthead: {
-                margin: "auto",
-                width: "180px"
             }
         }
     })
@@ -51,22 +42,25 @@ export default function FullWidthGrid() {
 
     return (
         <div className={classes.root} id="About">
-            <div className={classes.abouthead}>
-                <Typography variant="h2" className={classes.heading}>
-                    Who are we?
-                </Typography>
-            </div>
             <Grid container spacing={0}>
                 <Grid item xs={12} sm={6} lg={4}>
-                    <div className={classes.paper1}>
+                    <Paper className={classes.paper1}>
                         <img
                             src="/index/aboutus.jpg"
                             className={classes.image}
                         ></img>
-                    </div>
+                    </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6} lg={8}>
-                    <div className={classes.paper}>
+                    <Paper className={classes.paper}>
+                        <div className="about_head">
+                            <Typography
+                                variant="h1"
+                                className={classes.heading}
+                            >
+                                Who are we?
+                            </Typography>
+                        </div>
                         <Typography variant="subtitle1">
                             <p>
                                 The Indian Society for Technical Education
@@ -86,7 +80,7 @@ export default function FullWidthGrid() {
                                 Codathon, Megatreopuz, and Pro-shows.
                             </p>
                         </Typography>
-                    </div>
+                    </Paper>
                 </Grid>
             </Grid>
         </div>

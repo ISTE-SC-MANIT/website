@@ -11,23 +11,6 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 
-const theme = createMuiTheme({
-    typography: {
-        fontFamily: [
-            "-apple-system",
-            "BlinkMacSystemFont",
-            '"Segoe UI"',
-            "Roboto",
-            '"Helvetica Neue"',
-            "Arial",
-            "sans-serif",
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"'
-        ].join(",")
-        // Tell Material-UI what the font-size on the html element is.
-    }
-});
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1
@@ -59,6 +42,10 @@ const useStyles = makeStyles(theme => ({
         marginRight: "auto",
         marginTop: "20px",
         marginBottom: "20px"
+    },
+    subhead: {
+        width: "max-content",
+        margin: "auto"
     }
 }));
 
@@ -66,21 +53,20 @@ export default function FontSizeTheme() {
     const classes = useStyles();
     return (
         <div className={classes.section}>
-            <ThemeProvider theme={theme}>
-                <div className={classes.head}>
-                    <br></br>
-                    <Typography
-                        variant="h3"
-                        style={{
-                            color: "white",
-                            textAlign: "center",
-                            marginTop: "90px"
-                        }}
-                    >
-                        Why should you participate in Chimera-X?
-                    </Typography>
-                </div>
-            </ThemeProvider>
+            <div className={classes.head}>
+                <br></br>
+                <Typography
+                    variant="h3"
+                    style={{
+                        color: "white",
+                        textAlign: "center",
+                        marginTop: "90px"
+                    }}
+                >
+                    Why should you participate in Chimera-X?
+                </Typography>
+            </div>
+
             <div>
                 <Grid container>
                     <Grid item xs={12} sm={6} lg={4}>
@@ -89,29 +75,30 @@ export default function FontSizeTheme() {
                                 <CardMedia
                                     className={classes.media}
                                     image="/chimera/leader1.png"
-                                    title="Contemplative Reptile"
+                                    title="challenge"
                                 />
                                 <CardContent>
                                     <Typography
                                         gutterBottom
                                         variant="h5"
                                         component="h2"
+                                        className={classes.subhead}
                                     >
-                                        Suitable
+                                        Challenge
                                     </Typography>
                                     <Typography
                                         variant="body2"
                                         color="textSecondary"
                                         component="p"
                                     >
-                                        This is the reason why you should
-                                        participate in Chimera-X because you
-                                        never know, that chat with your friend
-                                        that you shrugged off as buffoonery
-                                        might be the key to some answer. You
-                                        will never count yourself out if you are
-                                        even moderately aware of your
-                                        surroundings.
+                                        Get ready to wear those thinking caps of
+                                        yours and show off your prowess to crack
+                                        mind-boggling questions and puzzles.
+                                        This would showcase your Out-of-the-box
+                                        wit needed to slice through the event.
+                                        It is said that challenges bring out the
+                                        best in people and we promise you this
+                                        one will surely live up to it.
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -124,26 +111,29 @@ export default function FontSizeTheme() {
                                 <CardMedia
                                     className={classes.media}
                                     image="/chimera/earth.png"
-                                    title="Contemplative Reptile"
+                                    title="platform"
                                 />
                                 <CardContent>
                                     <Typography
                                         gutterBottom
                                         variant="h5"
                                         component="h2"
+                                        className={classes.subhead}
                                     >
-                                        Suitable Heading
+                                        Interactive Platform
                                     </Typography>
                                     <Typography
                                         variant="body2"
                                         color="textSecondary"
                                         component="p"
                                     >
-                                        The questions time and again induce
-                                        sighs of I knew this from the audience.
-                                        To still maintain the standard of the
-                                        contest has always been a challenge, one
-                                        that the team takes very seriously.
+                                        Competitions like these act as a hub for
+                                        gaining knowledge and seek opportunities
+                                        that help excel beyond academics while
+                                        also being a platform for social
+                                        interaction. You may be no brainiacs but
+                                        being a part of something this big would
+                                        do a lot of good for you.
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -163,21 +153,21 @@ export default function FontSizeTheme() {
                                         gutterBottom
                                         variant="h5"
                                         component="h2"
+                                        className={classes.subhead}
                                     >
-                                        Suitable
+                                        Amazing Prizes
                                     </Typography>
                                     <Typography
                                         variant="body2"
                                         color="textSecondary"
                                         component="p"
                                     >
-                                        The pivotal cog in Chimera-Xs
-                                        considerable growth is the team that
-                                        curates such tantalizing questions,
-                                        which are hard for newbies to deny
-                                        outright as impossible and at the same
-                                        time hard for the experts to brush off
-                                        as another freebie.
+                                        If nothing gets to you, then the prizes
+                                        would surely do. Our event while being
+                                        sponsored by a rally of sponsors is
+                                        bundled with cash prizes and numerous
+                                        perks enough to provide you with the
+                                        needed propulsion.
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>

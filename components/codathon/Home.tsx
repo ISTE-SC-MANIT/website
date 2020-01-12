@@ -5,19 +5,32 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => {
     return {
+        container: {
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "1rem",
+
+            [theme.breakpoints.down("sm")]: {
+                padding: "8rem"
+            }
+        },
         root: {
-            backgroundImage: `url(${"/banner_bg.png"})`,
-            marginLeft: "-300px",
-            paddingBottom: "0px",
-            marginTop: "-230px",
-            height: "1020px"
+            backgroundImage: `url(${"/static/ab.jpg"})`,
+
+            marginLeft: "-200px",
+            height: "600px",
+            paddingBottom: "30px"
+            // marginTop: "-380px"
         },
         heading: {
             color: "white",
-            marginLeft: "250px",
-            marginTop: "230px"
+            marginLeft: "250px"
         },
-
+        fp: {
+            paddingTop: "35rem",
+            paddingBottom: "15rem"
+        },
         image1: {
             width: "400px",
             height: "300px",
@@ -38,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => {
             left: "100px"
         },
         imgcontainer: {
-            marginTop: "300px",
+            marginTop: "50px",
             background: "transparent",
             border: "null",
             marginLeft: "50px"
@@ -47,71 +60,76 @@ const useStyles = makeStyles((theme: Theme) => {
             marginTop: "190px",
             textAlign: "center"
         },
-        heading1: {
-            color: "white",
-            marginLeft: "250px"
-        },
         [theme.breakpoints.down("sm")]: {
             grid2: {
                 display: "none"
             },
             root: {
-                marginTop: "-50px",
-                marginLeft: "-400px",
-                height: "100vh"
+                paddingBottom: "40vh",
+                marginTop: "00px",
+                marginLeft: "-400px"
             },
             heading: {
                 marginLeft: "400px",
-                padding: "10px",
-                marginTop: "20px"
-            },
-            heading1: {
-                marginLeft: "400px",
-                padding: "5px"
+                padding: "10px"
             }
         }
     };
 });
 
-const Section1: React.FC = () => {
+const Home: React.FC = () => {
     const classes = useStyles();
 
     return (
-        <div className={classes.root} id="Home">
+        <div className={classes.root}>
             <Grid container spacing={0}>
                 <Grid item xs={12} sm={6} lg={8} className={classes.grid1}>
                     <Typography
                         variant="h3"
                         component="h2"
                         className={classes.heading}
+                        style={{
+                            background: "orange",
+                            top: "-40px",
+                            position: "relative"
+                        }}
                     >
-                        ISTE SC MANIT
+                        Codathon
                     </Typography>
                     <Typography
                         variant="subtitle1"
-                        className={classes.heading1}
+                        className={classes.heading}
+                        style={{
+                            background: "black",
+                            top: "-40px",
+                            position: "relative",
+                            textAlign: "center",
+                            padding: "6px"
+                        }}
                     >
-                        The best Students,s Chapter from last 3 years in MP-CG
-                        region
+                        Coding contest Codathon is an Inter NIT coding contest
+                        conducted by the Indian Society for Technical Education
+                        Students Chapter MANIT under CHIMERA, our annual
+                        students conclave.
                     </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} lg={4} className={classes.grid2}>
                     <div className={classes.imgcontainer}>
                         <div>
                             <img
-                                src="/index/version.jpg"
+                                src="/static/version.jpg"
                                 className={classes.image1}
                             ></img>
                         </div>
                         <div>
                             <img
-                                src="/index/chimerax.jpg"
+                                src="/static/chimerax.jpg"
                                 className={classes.image2}
                             ></img>
                         </div>
                         <div>
                             <img
-                                src="/index/codathon.jpg"
+                                src="/static/codathon.jpg"
                                 className={classes.image3}
                             ></img>
                         </div>
@@ -122,4 +140,4 @@ const Section1: React.FC = () => {
     );
 };
 
-export default Section1;
+export default Home;

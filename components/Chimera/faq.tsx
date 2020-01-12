@@ -7,23 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
-const theme = createMuiTheme({
-    typography: {
-        fontFamily: [
-            "-apple-system",
-            "BlinkMacSystemFont",
-            '"Segoe UI"',
-            "Roboto",
-            '"Helvetica Neue"',
-            "Arial",
-            "sans-serif",
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"'
-        ].join(",")
-        // Tell Material-UI what the font-size on the html element is.
-    }
-});
 const useStyles = makeStyles(theme => ({
     root: {
         width: "100%"
@@ -39,19 +22,18 @@ export default function SimpleExpansionPanel() {
 
     return (
         <div>
-            <ThemeProvider theme={theme}>
-                <div>
-                    <Typography
-                        variant="h3"
-                        style={{
-                            textAlign: "center",
-                            marginTop: "90px"
-                        }}
-                    >
-                        FAQs
-                    </Typography>
-                </div>
-            </ThemeProvider>
+            <div>
+                <Typography
+                    variant="h3"
+                    style={{
+                        textAlign: "center",
+                        marginTop: "90px"
+                    }}
+                >
+                    FAQs
+                </Typography>
+            </div>
+
             <div className={classes.root}>
                 <ExpansionPanel>
                     <ExpansionPanelSummary
@@ -60,14 +42,12 @@ export default function SimpleExpansionPanel() {
                         id="panel1a-header"
                     >
                         <Typography className={classes.heading}>
-                            Expansion Panel 1
+                            What is the number of members allowed in a team?
                         </Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                         <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Suspendisse malesuada lacus ex, sit amet
-                            blandit leo lobortis eget.
+                            Allowed team size is of maximum two people.
                         </Typography>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
@@ -78,14 +58,12 @@ export default function SimpleExpansionPanel() {
                         id="panel1a-header"
                     >
                         <Typography className={classes.heading}>
-                            Expansion Panel 1
+                            What is the registration fee per team?
                         </Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                         <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Suspendisse malesuada lacus ex, sit amet
-                            blandit leo lobortis eget.
+                            The registration fee is Rs 100 per team
                         </Typography>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
@@ -96,32 +74,14 @@ export default function SimpleExpansionPanel() {
                         id="panel1a-header"
                     >
                         <Typography className={classes.heading}>
-                            Expansion Panel 1
+                            What is the format of the event?
                         </Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                         <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Suspendisse malesuada lacus ex, sit amet
-                            blandit leo lobortis eget.
-                        </Typography>
-                    </ExpansionPanelDetails>
-                </ExpansionPanel>
-                <ExpansionPanel>
-                    <ExpansionPanelSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel2a-content"
-                        id="panel2a-header"
-                    >
-                        <Typography className={classes.heading}>
-                            Expansion Panel 2
-                        </Typography>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                        <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Suspendisse malesuada lacus ex, sit amet
-                            blandit leo lobortis eget.
+                            The prelims held in respective cities will be in the
+                            form of 2 rounds, a written round followed by a
+                            stage round.
                         </Typography>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>

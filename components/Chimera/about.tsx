@@ -6,22 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
-const theme = createMuiTheme({
-    typography: {
-        fontFamily: [
-            "-apple-system",
-            "BlinkMacSystemFont",
-            '"Segoe UI"',
-            "Roboto",
-            '"Helvetica Neue"',
-            "Arial",
-            "sans-serif",
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"'
-        ].join(",")
-    }
-});
+
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1
@@ -50,13 +35,13 @@ export default function FontSizeTheme() {
     const classes = useStyles();
     return (
         <div className={classes.section}>
-            <ThemeProvider theme={theme}>
+            
                 <div className={classes.head}>
                     <br></br>
                     <br></br>
                     <Typography variant="h2">ABOUT US</Typography>
                 </div>
-            </ThemeProvider>
+
             <br></br>
             <div>
                 <Grid container spacing={0}>
@@ -74,23 +59,7 @@ export default function FontSizeTheme() {
                     </Grid>
                     <Grid item xs={12} sm={6} lg={6} className={classes.main1}>
                         <Typography variant="h6" gutterBottom>
-                            Chimera-X is the flagship event of ISTE Students
-                            Chapter MANIT organised as a part of our annual
-                            students conclave Chimera. Chimera-X was first
-                            organised in 2003 and is entering its 17th edition.
-                            This experience and legacy of 17 years is what has
-                            made Chimera-X central Indias largest quiz contest
-                            and that too undisputed. From 2017 onwards Chimera-X
-                            took its first steps into the national quizzing
-                            scene after its prelims were conducted in 9 cities
-                            of the country. This figure went to 11 in the
-                            subsequent edition and is expected to push to other
-                            new cities. Chimera-x has already been conducted in
-                            Gwalior, Allahabad, Nagpur, Ujjain, Indore, Raipur,
-                            Mathura, Jabalpur, Hyderabad, New Delhi, Jaipur,
-                            Pune and Bhopal. Chimera-X is a general quiz
-                            consisting of city prelims and finale at MANIT
-                            Bhopal.
+                        Chimera-X is the flagship event of ISTE Students' Chapter MANIT organised as a part of our annual students' conclave Chimera. Chimera-X was first organised in 2003. It has been a sensation since its genesis, reaching thousands of individuals and making a hardcore and resonating impact in the minds of those who witnessed it. Chimera-X, undisputedly the largest quizzing competition in Central India stands at the heart of Chimera and this bluchip event of ours is not just events clubbed together but it is respresentative of the hard work of the team over the years which has resulted in its immense success. Last year Chimera-x was conducted across 16+ cities and this year we aim to reach more. This event while providing the students a getaway from the monotony of classroom lectures also poses a challenge to their knowledge and wit. Chimera-X is a general quiz consisting of city prelims in all the cities and grand finale held at MANIT Bhopal.
                             <br></br>
                             <br></br>
                             <Button variant="contained" color="secondary">
