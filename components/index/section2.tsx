@@ -7,25 +7,40 @@ import { Typography } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            flexGrow: 1
+            flexGrow: 1,
+            paddingTop: "200px"
         },
         paper: {
-            padding: theme.spacing(10),
+            padding: theme.spacing(5),
             textAlign: "center",
-            color: theme.palette.text.secondary
+            color: theme.palette.text.secondary,
+            marginTop: "70px"
         },
         paper1: {
             padding: theme.spacing(2),
             textAlign: "center",
-            color: theme.palette.text.secondary
+            color: theme.palette.text.secondary,
+            height: 570
         },
         image: {
             width: "90%",
-            height: "460px"
+            height: "350px",
+            borderRadius: "5%"
+        },
+        heading: {
+            color: "black"
+        },
+        abouthead: {
+            margin: "auto",
+            width: "350px"
         },
         [theme.breakpoints.down("sm")]: {
             root: {
                 paddingTop: "200px"
+            },
+            abouthead: {
+                margin: "auto",
+                width: "180px"
             }
         }
     })
@@ -35,21 +50,23 @@ export default function FullWidthGrid() {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
+        <div className={classes.root} id="About">
+            <div className={classes.abouthead}>
+                <Typography variant="h2" className={classes.heading}>
+                    Who are we?
+                </Typography>
+            </div>
             <Grid container spacing={0}>
                 <Grid item xs={12} sm={6} lg={4}>
-                    <Paper className={classes.paper1}>
+                    <div className={classes.paper1}>
                         <img
-                            src="/static/aboutus.jpg"
+                            src="/index/aboutus.jpg"
                             className={classes.image}
                         ></img>
-                    </Paper>
+                    </div>
                 </Grid>
                 <Grid item xs={12} sm={6} lg={8}>
-                    <Paper className={classes.paper}>
-                        <div className="about_head">
-                            <Typography variant="h1">Who are we?</Typography>
-                        </div>
+                    <div className={classes.paper}>
                         <Typography variant="subtitle1">
                             <p>
                                 The Indian Society for Technical Education
@@ -69,7 +86,7 @@ export default function FullWidthGrid() {
                                 Codathon, Megatreopuz, and Pro-shows.
                             </p>
                         </Typography>
-                    </Paper>
+                    </div>
                 </Grid>
             </Grid>
         </div>

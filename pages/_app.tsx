@@ -2,7 +2,7 @@ import React from "react";
 import createMuiTheme, { Theme } from "@material-ui/core/styles/createMuiTheme";
 import { ThemeProvider } from "@material-ui/core";
 import { useRouter } from "next/router";
-import Header from "../components/header";
+import Header from "../components/header1";
 const MyApp = ({
     Component,
     pageProps
@@ -13,7 +13,9 @@ const MyApp = ({
     const [theme, setTheme] = React.useState<Theme>(() => createMuiTheme());
 
     const { route } = useRouter();
-    const first = route.split("/")[0];
+
+    const first = route.split("/")[1];
+    console.log(first);
 
     React.useEffect(() => {
         switch (first) {
@@ -22,6 +24,13 @@ const MyApp = ({
                     .then(theme => setTheme(theme.default))
                     .catch(err => console.log(err.message));
                 break;
+            case "chimera": {
+                console.log("This is chimera page");
+                import("../components/Chimera/theme")
+                    .then(theme => setTheme(theme.default))
+                    .catch(err => console.log(err.message));
+                break;
+            }
         }
     }, [first]);
 
@@ -35,7 +44,7 @@ const MyApp = ({
     return (
         <ThemeProvider theme={theme}>
             {/* Add header here */}
-            <Header />
+
             <Component {...pageProps} />
             {/* Add footer here */}
         </ThemeProvider>
