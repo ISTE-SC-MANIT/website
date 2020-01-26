@@ -38,5 +38,11 @@ module.exports = {
             "Hyperlink",
             { name: "Link", linkAttribute: "to" }
         ]
+    },
+    rules: {
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/no-explicit-any": 0,
+        "react/prop-types": 0,
+        "react/no-unescaped-entities": 0
     }
 };

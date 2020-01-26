@@ -1,6 +1,6 @@
 import React from "react";
-import { Container, Theme, Typography, Grid, Paper } from "@material-ui/core";
-import { useMediaQuery } from "@material-ui/core";
+import { Container, Theme, Typography, Grid, Paper , useMediaQuery } from "@material-ui/core";
+
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => {

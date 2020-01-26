@@ -1,9 +1,9 @@
 
 import Head from 'next/head';
 
-import Nav2_Team from "../components/Nav2_Team";
-import Header_Team from "../components/Header_Team";
-import { MaterialGrid_Team } from "../components/MaterialGrid_Team";
+// import Nav2_Team from "../components/Nav2_Team";
+// import Header_Team from "../components/Header_Team";
+// import { MaterialGrid_Team } from "../components/MaterialGrid_Team";
 
 
 
@@ -26,9 +26,9 @@ const index = () =>{
             
             
             
-            <Nav2_Team/>
-            <Header_Team/>
-            <MaterialGrid_Team />
+            {/* <Nav2_Team/> */}
+            {/* <Header_Team/> */}
+            {/* <MaterialGrid_Team /> */}
             
             
         </div>

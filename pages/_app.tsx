@@ -1,8 +1,8 @@
 import React from "react";
 import createMuiTheme, { Theme } from "@material-ui/core/styles/createMuiTheme";
-import { ThemeProvider } from "@material-ui/core";
+import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import { useRouter } from "next/router";
-import Header from "../components/header1";
+import LoadingScreen from "../components/loading";
 const MyApp = ({
     Component,
     pageProps
@@ -15,7 +15,6 @@ const MyApp = ({
     const { route } = useRouter();
 
     const first = route.split("/")[1];
-    console.log(first);
 
     React.useEffect(() => {
         switch (first) {
@@ -24,13 +23,16 @@ const MyApp = ({
                     .then(theme => setTheme(theme.default))
                     .catch(err => console.log(err.message));
                 break;
-            case "chimera": {
-                console.log("This is chimera page");
+            case "chimera":
                 import("../components/Chimera/theme")
                     .then(theme => setTheme(theme.default))
                     .catch(err => console.log(err.message));
                 break;
-            }
+            case "megatreopuz":
+                import("../components/megatreopuz/theme")
+                    .then(theme => setTheme(theme.default))
+                    .catch(err => console.log(err.message));
+                break;
         }
     }, [first]);
 
@@ -41,11 +43,14 @@ const MyApp = ({
         }
     }, []);
 
+    const [loading, setLoading] = React.useState<boolean>(false);
+
     return (
         <ThemeProvider theme={theme}>
-            {/* Add header here */}
-
-            <Component {...pageProps} />
+            {/* Loading screen */}
+            <CssBaseline />
+            <LoadingScreen loading={loading} />
+            <Component {...pageProps} {...{ loading, setLoading }} />
             {/* Add footer here */}
         </ThemeProvider>
     );
