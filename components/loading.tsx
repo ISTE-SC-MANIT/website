@@ -6,7 +6,7 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
         background: fade(theme.palette.common.black, 0.5),
-        position: "absolute",
+        position: "fixed",
         top: 0,
         left: 0,
         right: 0,

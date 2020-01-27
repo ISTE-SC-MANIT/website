@@ -19,6 +19,7 @@ module.exports = {
         //         preventFullImport: false
         //     }
         // }],
+        "relay",
         "@babel/plugin-transform-runtime"
     ]
 };

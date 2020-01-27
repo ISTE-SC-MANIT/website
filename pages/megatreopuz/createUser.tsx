@@ -44,7 +44,6 @@ const CreateUser: NextPage<Props> = ({ setLoading }) => {
                 ) => {
                     setLoading(true);
                     const cookies = document.cookie.split("access_token=");
-                    // console.log(cookies);
                     if (cookies.length !== 2) {
                         setLoading(false);
                         setSubmitting(false);

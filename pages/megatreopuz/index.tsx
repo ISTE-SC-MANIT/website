@@ -35,6 +35,7 @@ interface Props {
 
 const LoginPage: NextPage<Props> = ({ setLoading }) => {
     const router = useRouter();
+
     return (
         <>
             <GoogleLogin
