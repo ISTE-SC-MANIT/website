@@ -23,9 +23,14 @@ const useStyles = makeStyles((theme: Theme) => {
             paddingBottom: "30px"
             // marginTop: "-380px"
         },
-        heading: {
+        heading1: {
             color: "white",
-            marginLeft: "250px"
+            marginLeft: "250px",
+            
+        },heading2: {
+            color: "white",
+            marginLeft: "250px",
+            
         },
         fp: {
             paddingTop: "35rem",
@@ -60,20 +65,72 @@ const useStyles = makeStyles((theme: Theme) => {
             marginTop: "190px",
             textAlign: "center"
         },
+        [theme.breakpoints.down("md")]: {
+            grid2: {
+              
+            },
+            root: {
+                paddingBottom: "40vh",
+                marginTop: "00px",
+                marginLeft: "-200px"
+            },
+            image1:{
+                height:"188px",
+                
+            top: "0px",
+            left: "50px"
+            },image2:{
+                height:"188px",
+                top: "-139px",
+                left: "100px"
+            },image3:{
+                height:"258px",
+                top: "-239px",
+                left: "150px"
+            },
+            heading1: {
+                marginLeft: "400px",
+                padding: "10px",
+                marginTop:"-10px",
+                fontSize:"33px"
+            
+            }, heading2: {
+                marginLeft: "400px",
+                padding: "20px",
+                marginTop:"0px",
+                fontSize:"16px"
+            
+            },
+
+        },
         [theme.breakpoints.down("sm")]: {
             grid2: {
-                display: "none"
+             display:"none"
             },
+        
             root: {
                 paddingBottom: "40vh",
                 marginTop: "00px",
                 marginLeft: "-400px"
             },
-            heading: {
+            heading1: {
                 marginLeft: "400px",
-                padding: "10px"
-            }
+                padding: "10px",
+                marginTop:"-10px",
+                
+            
+            },heading2: {
+                marginLeft: "400px",
+                padding: "10px",
+                marginTop:"0px",
+                fontSize:"15px",
+                
+                width:"550"
+            
+            },
+
         }
+        
     };
 });
 
@@ -87,24 +144,26 @@ const Home: React.FC = () => {
                     <Typography
                         variant="h3"
                         component="h2"
-                        className={classes.heading}
+                        className={classes.heading1}
                         style={{
                             background: "orange",
-                            top: "-40px",
-                            position: "relative"
+                            top: "-30px",
+                            position: "relative",
+                            borderRadius:"98px"
                         }}
                     >
                         Codathon
                     </Typography>
                     <Typography
                         variant="subtitle1"
-                        className={classes.heading}
+                        className={classes.heading2}
                         style={{
                             background: "black",
-                            top: "-40px",
+                            top: "-30px",
                             position: "relative",
                             textAlign: "center",
-                            padding: "6px"
+                            padding: "16px",
+                            borderRadius:"120px"
                         }}
                     >
                         Coding contest Codathon is an Inter NIT coding contest

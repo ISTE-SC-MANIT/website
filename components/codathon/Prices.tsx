@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
     },
     card2: {
         padding: "10px",
-        margin: "25px",
+        margin: "15px",
         height: "160px",
         border: "30px"
     },
@@ -71,12 +71,12 @@ const useStyles = makeStyles(theme => ({
     },
     paperterms: {
         padding: "2px",
-        margin: "15px",
+        margin: "1px",
         height: "220px",
         width: "3px"
     },
     pricepaper: {
-        backgroundColor: "lightblue",
+        backgroundColor: "#ffa726",
         margin: "auto",
         width: "80%"
     },
@@ -90,6 +90,15 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("sm")]: {
         media: {
             height: 200
+        },
+       card2: {
+          height:"260px"
+        },
+        cardReg: {
+            height:"270px"
+        },
+        termm:{
+           fontSize:"13px"
         }
     }
 }));
@@ -104,14 +113,14 @@ export default function Prices() {
                     <Typography
                         variant="h3"
                         style={{
-                            backgroundColor: "white",
-                            color: "Black",
+                            backgroundColor: "#ffa726",
+                            color: "white",
                             textAlign: "center",
-                            marginTop: "8px",
+                            marginTop: "-20px",
                             marginBottom: "0px"
                         }}
                     >
-                        Prices
+                        Prizes
                     </Typography>
                 </div>
             </ThemeProvider>
@@ -127,11 +136,10 @@ export default function Prices() {
                                         }}
                                     >
                                         <Typography
-                                            gutterBottom
-                                            variant="h5"
+                                            variant="h4"
                                             component="h2"
                                         >
-                                            {" "}
+                                        
                                             12,000 ₹
                                         </Typography>
                                     </CardContent>
@@ -157,7 +165,7 @@ export default function Prices() {
                                     >
                                         <Typography
                                             gutterBottom
-                                            variant="h5"
+                                            variant="h4"
                                             component="h2"
                                         >
                                             9,000 ₹
@@ -185,7 +193,7 @@ export default function Prices() {
                                     >
                                         <Typography
                                             gutterBottom
-                                            variant="h5"
+                                            variant="h4"
                                             component="h2"
                                         >
                                             6,000 ₹
@@ -213,7 +221,7 @@ export default function Prices() {
                                     >
                                         <Typography
                                             gutterBottom
-                                            variant="h5"
+                                            variant="h4"
                                             component="h2"
                                         >
                                             4,000 ₹
@@ -241,7 +249,7 @@ export default function Prices() {
                                     >
                                         <Typography
                                             gutterBottom
-                                            variant="h5"
+                                            variant="h4"
                                             component="h2"
                                         >
                                             2,000 ₹
@@ -387,13 +395,15 @@ export default function Prices() {
                         style={{
                             textAlign: "center",
                             fontSize: "20px",
-                            margin: "11px"
+                            marginTop: "-1px",
+                            backgroundColor:"orange ",
+                            color:"white"
                         }}
                     >
                         {" "}
                         Terms and Conditions
                     </Typography>
-                    <Typography
+                    <Typography className={classes.termm}
                         color="textSecondary"
                         style={{ textAlign: "center" }}
                     >

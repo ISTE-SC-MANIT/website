@@ -3,6 +3,7 @@ import React from "react";
 import Home from "../components/codathon/Home";
 import About from "../components/codathon/About";
 import Prices from "../components/codathon/Prices";
+import Nav from "../components/codathon/Nav";
 
 // import Section1 from "../components/index/section1";
 // import Section2 from "../components/index/section2";
@@ -12,6 +13,7 @@ import Prices from "../components/codathon/Prices";
 const Codathon: NextPage = () => {
     return (
         <div>
+            <Nav/>
             <Home />
             <About />
             <Prices />
