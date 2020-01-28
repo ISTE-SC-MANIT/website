@@ -1,5 +1,12 @@
 import React from "react";
-import { Container, Theme, Typography, Grid, Paper , useMediaQuery } from "@material-ui/core";
+import {
+    Container,
+    Theme,
+    Typography,
+    Grid,
+    Paper,
+    useMediaQuery
+} from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -25,12 +32,11 @@ const useStyles = makeStyles((theme: Theme) => {
         },
         heading1: {
             color: "white",
-            marginLeft: "250px",
-            
-        },heading2: {
+            marginLeft: "250px"
+        },
+        heading2: {
             color: "white",
-            marginLeft: "250px",
-            
+            marginLeft: "250px"
         },
         fp: {
             paddingTop: "35rem",
@@ -66,48 +72,46 @@ const useStyles = makeStyles((theme: Theme) => {
             textAlign: "center"
         },
         [theme.breakpoints.down("md")]: {
-            grid2: {
-              
-            },
+            grid2: {},
             root: {
                 paddingBottom: "40vh",
                 marginTop: "00px",
                 marginLeft: "-200px"
             },
-            image1:{
-                height:"188px",
-                
-            top: "0px",
-            left: "50px"
-            },image2:{
-                height:"188px",
+            image1: {
+                height: "188px",
+
+                top: "0px",
+                left: "50px"
+            },
+            image2: {
+                height: "188px",
                 top: "-139px",
                 left: "100px"
-            },image3:{
-                height:"258px",
+            },
+            image3: {
+                height: "258px",
                 top: "-239px",
                 left: "150px"
             },
             heading1: {
                 marginLeft: "400px",
                 padding: "10px",
-                marginTop:"-10px",
-                fontSize:"33px"
-            
-            }, heading2: {
+                marginTop: "-10px",
+                fontSize: "33px"
+            },
+            heading2: {
                 marginLeft: "400px",
                 padding: "20px",
-                marginTop:"0px",
-                fontSize:"16px"
-            
-            },
-
+                marginTop: "0px",
+                fontSize: "16px"
+            }
         },
         [theme.breakpoints.down("sm")]: {
             grid2: {
-             display:"none"
+                display: "none"
             },
-        
+
             root: {
                 paddingBottom: "40vh",
                 marginTop: "00px",
@@ -116,21 +120,17 @@ const useStyles = makeStyles((theme: Theme) => {
             heading1: {
                 marginLeft: "400px",
                 padding: "10px",
-                marginTop:"-10px",
-                
-            
-            },heading2: {
+                marginTop: "-10px"
+            },
+            heading2: {
                 marginLeft: "400px",
                 padding: "10px",
-                marginTop:"0px",
-                fontSize:"15px",
-                
-                width:"550"
-            
-            },
+                marginTop: "0px",
+                fontSize: "15px",
 
+                width: "550"
+            }
         }
-        
     };
 });
 
@@ -149,7 +149,7 @@ const Home: React.FC = () => {
                             background: "orange",
                             top: "-30px",
                             position: "relative",
-                            borderRadius:"98px"
+                            borderRadius: "98px"
                         }}
                     >
                         Codathon
@@ -163,7 +163,7 @@ const Home: React.FC = () => {
                             position: "relative",
                             textAlign: "center",
                             padding: "16px",
-                            borderRadius:"120px"
+                            borderRadius: "120px"
                         }}
                     >
                         Coding contest Codathon is an Inter NIT coding contest

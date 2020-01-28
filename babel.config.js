@@ -19,7 +19,9 @@ module.exports = {
         //         preventFullImport: false
         //     }
         // }],
-        "relay",
+    ["relay", {
+        "artifactDirectory": "./components/megatreopuz/relay/__generated__"
+    }],
         "@babel/plugin-transform-runtime"
     ]
 };

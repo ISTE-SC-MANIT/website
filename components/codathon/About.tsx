@@ -12,9 +12,8 @@ const useStyles = makeStyles((theme: Theme) =>
         paper: {
             padding: theme.spacing(10),
             textAlign: "center",
-            marginTop:"-60px",
+            marginTop: "-60px",
             color: theme.palette.text.secondary
-
         },
         paper1: {
             padding: theme.spacing(2),
@@ -25,60 +24,57 @@ const useStyles = makeStyles((theme: Theme) =>
             width: "90%",
             height: "300px"
         },
-        abouthead:{
+        abouthead: {
             margin: "auto",
             width: "400px",
-            color:"white",
-            backgroundColor:"orange",
-            alignSelf:"center",
-            position:"relative",
-            left:"240px",
-            marginTop:"40px"
+            color: "white",
+            backgroundColor: "orange",
+            alignSelf: "center",
+            position: "relative",
+            left: "240px",
+            marginTop: "40px"
         },
-        aboutcon:{
-            position:"relative",
-            
+        aboutcon: {
+            position: "relative"
         },
 
         [theme.breakpoints.down("sm")]: {
             root: {
                 paddingTop: "200px"
             },
-            abouthead:{
-                marginTop:"-180px",
-                left:"0px"
+            abouthead: {
+                marginTop: "-180px",
+                left: "0px"
             },
-            paper:{
-                height:"700px",
-                textAlign:"center",
-                letterSpacing:"4px",
-                
+            paper: {
+                height: "700px",
+                textAlign: "center",
+                letterSpacing: "4px"
             },
-            aboutcon:{
-                left:"100px",
-                margin:"auto"
+            aboutcon: {
+                left: "100px",
+                margin: "auto"
             }
         },
         [theme.breakpoints.down("md")]: {
             root: {
                 paddingTop: "200px"
             },
-            abouthead:{
-                marginTop:"-180px",
-                left:"0px"
+            abouthead: {
+                marginTop: "-180px",
+                left: "0px"
             },
-            paper:{
-                height:"700px",
-                textAlign:"left",
-                letterSpacing:"4px",
-                
+            paper: {
+                height: "700px",
+                textAlign: "left",
+                letterSpacing: "4px"
             },
-            aboutcon:{
-                height:"9px",
-                fontSize:"15px",
-                textAlign:"center",
-                width:"300px",
-                left:"-70px"
+            aboutcon: {
+                height: "9px",
+                fontSize: "15px",
+                textAlign: "center",
+                width: "300px",
+                left: "-70px"
             }
         }
     })
@@ -89,12 +85,15 @@ export default function About() {
 
     return (
         <div className={classes.root}>
-            
             <div className={classes.abouthead}>
-                            <Typography variant="h3" style={{padding:"4px",marginLeft:"26px"}}>About Codathon</Typography>
-                        </div>
+                <Typography
+                    variant="h3"
+                    style={{ padding: "4px", marginLeft: "26px" }}
+                >
+                    About Codathon
+                </Typography>
+            </div>
             <Grid container spacing={0}>
-            
                 <Grid item xs={12} sm={6} lg={4}>
                     <div className={classes.paper1}>
                         <img
@@ -105,8 +104,11 @@ export default function About() {
                 </Grid>
                 <Grid item xs={12} sm={6} lg={8}>
                     <div className={classes.paper}>
-                        
-                        <Typography variant="subtitle1" style={{lineHeight:"27px"}} className={classes.aboutcon}>
+                        <Typography
+                            variant="subtitle1"
+                            style={{ lineHeight: "27px" }}
+                            className={classes.aboutcon}
+                        >
                             <p>
                                 Codathon is an Inter NIT coding contest
                                 conducted by the Indian Society for Technical

@@ -1,5 +1,9 @@
 import React from "react";
-import { createMuiTheme, ThemeProvider , makeStyles } from "@material-ui/core/styles";
+import {
+    createMuiTheme,
+    ThemeProvider,
+    makeStyles
+} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -91,14 +95,14 @@ const useStyles = makeStyles(theme => ({
         media: {
             height: 200
         },
-       card2: {
-          height:"260px"
+        card2: {
+            height: "260px"
         },
         cardReg: {
-            height:"270px"
+            height: "270px"
         },
-        termm:{
-           fontSize:"13px"
+        termm: {
+            fontSize: "13px"
         }
     }
 }));
@@ -135,11 +139,7 @@ export default function Prices() {
                                             textAlign: "center"
                                         }}
                                     >
-                                        <Typography
-                                            variant="h4"
-                                            component="h2"
-                                        >
-                                        
+                                        <Typography variant="h4" component="h2">
                                             12,000 ₹
                                         </Typography>
                                     </CardContent>
@@ -396,14 +396,15 @@ export default function Prices() {
                             textAlign: "center",
                             fontSize: "20px",
                             marginTop: "-1px",
-                            backgroundColor:"orange ",
-                            color:"white"
+                            backgroundColor: "orange ",
+                            color: "white"
                         }}
                     >
                         {" "}
                         Terms and Conditions
                     </Typography>
-                    <Typography className={classes.termm}
+                    <Typography
+                        className={classes.termm}
                         color="textSecondary"
                         style={{ textAlign: "center" }}
                     >

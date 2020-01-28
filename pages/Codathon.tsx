@@ -13,7 +13,7 @@ import Nav from "../components/codathon/Nav";
 const Codathon: NextPage = () => {
     return (
         <div>
-            <Nav/>
+            <Nav />
             <Home />
             <About />
             <Prices />
