@@ -1,21 +1,25 @@
 /* tslint:disable */
 /* eslint-disable */
-/* @relayHash 0bc47af29c895b81ca26310408baf5fc */
+/* @relayHash ce9c4aa872022ff478c74b0f4506dc7c */
 
 import { ConcreteRequest } from "relay-runtime";
 export type AppViewerQueryVariables = {};
 export type AppViewerQueryResponse = {
     readonly viewer: {
         readonly id: string;
-        readonly username: string;
+        readonly userName: string;
         readonly name: string;
-        readonly email: string | null;
-        readonly phone: string | null;
-        readonly college: string | null;
-        readonly year: string | null;
-        readonly country: string | null;
-        readonly admin: boolean | null;
-        readonly currentquestion: number;
+        readonly email: string;
+        readonly phone: string;
+        readonly college: string;
+        readonly year: string;
+        readonly lastAnsweredQuestionTime: unknown;
+        readonly country: string;
+        readonly admin: boolean;
+        readonly lastAnsweredQuestion: number;
+        readonly totalQuestionsAnswered: number;
+        readonly lastAnswerTime: number | null;
+        readonly rank: number | null;
     };
 };
 export type AppViewerQuery = {
@@ -29,15 +33,19 @@ export type AppViewerQuery = {
 query AppViewerQuery {
   viewer {
     id
-    username
+    userName
     name
     email
     phone
     college
     year
+    lastAnsweredQuestionTime
     country
     admin
-    currentquestion
+    lastAnsweredQuestion
+    totalQuestionsAnswered
+    lastAnswerTime
+    rank
   }
 }
 */
@@ -63,7 +71,7 @@ var v0 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "username",
+        "name": "userName",
         "args": null,
         "storageKey": null
       },
@@ -105,6 +113,13 @@ var v0 = [
       {
         "kind": "ScalarField",
         "alias": null,
+        "name": "lastAnsweredQuestionTime",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
         "name": "country",
         "args": null,
         "storageKey": null
@@ -119,7 +134,28 @@ var v0 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "currentquestion",
+        "name": "lastAnsweredQuestion",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "totalQuestionsAnswered",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "lastAnswerTime",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "rank",
         "args": null,
         "storageKey": null
       }
@@ -146,10 +182,10 @@ return {
     "operationKind": "query",
     "name": "AppViewerQuery",
     "id": null,
-    "text": "query AppViewerQuery {\n  viewer {\n    id\n    username\n    name\n    email\n    phone\n    college\n    year\n    country\n    admin\n    currentquestion\n  }\n}\n",
+    "text": "query AppViewerQuery {\n  viewer {\n    id\n    userName\n    name\n    email\n    phone\n    college\n    year\n    lastAnsweredQuestionTime\n    country\n    admin\n    lastAnsweredQuestion\n    totalQuestionsAnswered\n    lastAnswerTime\n    rank\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '644ceba743d20ad239be84aab0a1f266';
+(node as any).hash = '9ca4d7391941fac29d375d2f022230d2';
 export default node;

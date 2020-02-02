@@ -1,9 +1,19 @@
 # source: http://localhost:8080/graphql
-# timestamp: Sun Feb 02 2020 01:53:09 GMT+0530 (India Standard Time)
+# timestamp: Sun Feb 02 2020 20:05:45 GMT+0530 (India Standard Time)
+
+type Mutation {
+  deleteUser: User!
+  updateUser(userInfo: UserInput!): User!
+}
 
 type Query {
   viewer: User!
 }
+
+"""
+The javascript `Date` as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
 
 type User {
   id: String!
@@ -13,10 +23,18 @@ type User {
   phone: String!
   college: String!
   year: String!
+  lastAnsweredQuestionTime: Timestamp!
   country: String!
   admin: Boolean!
   lastAnsweredQuestion: Float!
   totalQuestionsAnswered: Float!
-  lastAnswerTime: String
+  lastAnswerTime: Int
   rank: Int
+}
+
+input UserInput {
+  college: String
+  phone: String
+  year: String
+  country: String
 }

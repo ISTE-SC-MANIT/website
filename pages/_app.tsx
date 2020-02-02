@@ -42,21 +42,20 @@ const MyApp = ({
             case "":
                 import("../components/index/theme")
                     .then(theme => setTheme(theme.default))
-                    .catch(err => console.log(err.message));
+                    .catch(err => console.error(err.message));
                 break;
             case "chimera":
                 import("../components/Chimera/theme")
                     .then(theme => setTheme(theme.default))
-                    .catch(err => console.log(err.message));
+                    .catch(err => console.error(err.message));
                 break;
             case "megatreopuz":
                 import("../components/megatreopuz/theme")
                     .then(theme => setTheme(theme.default))
-                    .catch(err => console.log(err.message));
+                    .catch(err => console.error(err.message));
                 break;
         }
     }, [first]);
-
     React.useEffect(() => {
         const jssStyles = document.querySelector("#jss-server-side");
         if (jssStyles && jssStyles.parentNode) {
@@ -101,15 +100,19 @@ const MyApp = ({
                         query AppViewerQuery {
                             viewer {
                                 id
-                                username
+                                userName
                                 name
                                 email
                                 phone
                                 college
                                 year
+                                lastAnsweredQuestionTime
                                 country
                                 admin
-                                currentquestion
+                                lastAnsweredQuestion
+                                totalQuestionsAnswered
+                                lastAnswerTime
+                                rank
                             }
                         }
                     `}
@@ -120,6 +123,7 @@ const MyApp = ({
                             return (
                                 <Component
                                     viewer={props.viewer}
+                                    environment={environment}
                                     {...pageProps}
                                     {...{
                                         loading,
@@ -129,7 +133,7 @@ const MyApp = ({
                                 />
                             );
                         }
-                        return <h1>Loading data...</h1>;
+                        return <LoadingScreen loading={true} />;
                     }}
                 />
             )}

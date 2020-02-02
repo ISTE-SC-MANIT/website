@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "relay": "rm -rf ./components/megatreopuz/relay/__generated__ && npx relay-compiler --language typescript --artifactDirectory ./components/megatreopuz/relay/__generated__ --src ./pages --schema ./megatreopuz.graphql --extensions ts tsx",
+        "relay": "rm -rf ./components/megatreopuz/relay/__generated__ && npx relay-compiler --config=\"./relay.config.js\"",
         "get-schema": "graphql get-schema",
         "lint": "eslint pages --ext .ts,.tsx components --ext .ts,.tsx",
         "format": "prettier --write \"{pages,components}/**/*.{ts,tsx}\"",
@@ -17,6 +17,7 @@
         "@material-ui/core": "^4.8.0",
         "@material-ui/icons": "^4.5.1",
         "@material-ui/styles": "^4.7.1",
+        "clsx": "^1.0.4",
         "dotenv": "^8.2.0",
         "formik": "^2.1.2",
         "js-cookie": "^2.2.1",

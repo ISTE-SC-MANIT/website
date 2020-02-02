@@ -21,7 +21,7 @@ import {
 } from "@material-ui/core";
 import cookie from "js-cookie";
 import { PageProps } from "../_app";
-import { route } from "next/dist/next-server/server/router";
+import { reloadToken } from "../../components/megatreopuz/util";
 
 const authenticate = (email: string) => {
     return fetch(`${process.env.MEGATREOPUZ_SERVER}/authenticate`, {
@@ -35,6 +35,8 @@ const authenticate = (email: string) => {
         })
     });
 };
+
+
 
 const checkUser = (
     googleUser: GoogleLoginResponseOffline | GoogleLoginResponse
@@ -61,6 +63,8 @@ const checkUser = (
                     expires: new Date(expiresAt),
                     sameSite: "strict"
                 });
+            const timeToExpire = expiresAt - Date.now() - 60 * 60 * 100;
+            setTimeout(() => reloadToken(googleUser), timeToExpire);
             return exists;
         })
         .catch(console.error);
