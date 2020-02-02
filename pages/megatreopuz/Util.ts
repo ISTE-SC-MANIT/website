@@ -1,3 +1,4 @@
+import cookie from "js-cookie";
 export function getTokken() {
     if (!document) {
         return "";

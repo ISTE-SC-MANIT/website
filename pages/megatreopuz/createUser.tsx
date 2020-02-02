@@ -9,14 +9,12 @@ import {
     Grid,
     Typography,
     Card,
-    CardActionArea,
-    CardMedia,
     CardContent,
-    CardActions,
     makeStyles,
     Divider
 } from "@material-ui/core";
 import { useRouter } from "next/router";
+import cookie from "js-cookie";
 interface Props {
     loading: boolean;
     setLoading: (b: boolean) => void;
@@ -64,7 +62,7 @@ const useStyles = makeStyles({
     }
 });
 
-const CreateUser: NextPage<Props> = ({ setLoading }) => {
+const CreateUser: NextPage<Props> = ({ loading, setLoading }) => {
     const router = useRouter();
     const classes = useStyles();
 
@@ -80,17 +78,14 @@ const CreateUser: NextPage<Props> = ({ setLoading }) => {
                             { setSubmitting }
                         ) => {
                             setLoading(true);
-                            const cookies = document.cookie.split(
-                                "access_token="
-                            );
-                            if (cookies.length !== 2) {
+                            const token = cookie.get("access_token");
+                            if (!token) {
+                                console.error(
+                                    "Invalid token. Please sign in using google"
+                                );
                                 setLoading(false);
-                                setSubmitting(false);
-                                console.error("Invalid Cookie");
                                 return;
                             }
-
-                            const token = cookies[1].split(";")[0];
                             fetch(`${process.env.MEGATREOPUZ_SERVER}/signUp`, {
                                 method: "POST",
                                 headers: {
@@ -109,9 +104,25 @@ const CreateUser: NextPage<Props> = ({ setLoading }) => {
                                 .then(() => {
                                     setLoading(false);
                                     setSubmitting(false);
+                                    cookie.set(
+                                        "user_exists",
+                                        Boolean(true).toString(),
+                                        {
+                                            expires: new Date(
+                                                Number.parseInt(
+                                                    cookie.get("expires_at") ||
+                                                        "0"
+                                                )
+                                            ),
+                                            sameSite: "strict"
+                                        }
+                                    );
                                     router.replace("/megatreopuz/dashboard");
                                 })
-                                .catch(console.error);
+                                .catch((err: Error) => {
+                                    setLoading(false);
+                                    console.error(err.message);
+                                });
                         }}
                     >
                         <Form>
@@ -176,6 +187,7 @@ const CreateUser: NextPage<Props> = ({ setLoading }) => {
                                     justify="center"
                                 >
                                     <Button
+                                        disabled={loading}
                                         type="submit"
                                         variant="contained"
                                         color="primary"

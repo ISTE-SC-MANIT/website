@@ -6,38 +6,24 @@ import GoogleLogin, {
 } from "react-google-login";
 import { useRouter } from "next/router";
 import CardMedia from "@material-ui/core/CardMedia";
-import clsx from "clsx";
-import Collapse from "@material-ui/core/Collapse";
-
 import {
     Card,
     CardHeader,
     Avatar,
-    IconButton,
     createStyles,
     makeStyles,
     Theme,
     Typography,
-    CardActions,
     CardContent,
     Divider,
-    Container,
     Grid,
     Box
 } from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import cookie from "js-cookie";
+import { PageProps } from "../_app";
+import { route } from "next/dist/next-server/server/router";
 
-const checkUser = (
-    googleUser: GoogleLoginResponseOffline | GoogleLoginResponse
-): Promise<boolean | void> => {
-    if ("code" in googleUser) return Promise.resolve(false);
-    const token = googleUser.getAuthResponse().id_token;
-    document.cookie = `access_token=${token}`;
-
+const authenticate = (email: string) => {
     return fetch(`${process.env.MEGATREOPUZ_SERVER}/authenticate`, {
         method: "POST",
         headers: {
@@ -45,18 +31,41 @@ const checkUser = (
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            authentication: token
+            email
         })
-    })
+    });
+};
+
+const checkUser = (
+    googleUser: GoogleLoginResponseOffline | GoogleLoginResponse
+): Promise<boolean | void> => {
+    // No SSR
+    if ("code" in googleUser) return Promise.resolve(false);
+    // Find the access_token
+    const token = googleUser.getAuthResponse().id_token;
+    const expiresAt = googleUser.getAuthResponse().expires_at;
+    cookie.set("access_token", token, {
+        expires: new Date(expiresAt),
+        sameSite: "strict"
+    });
+    cookie.set("expires_at", expiresAt.toString(), {
+        expires: new Date(expiresAt),
+        sameSite: "strict"
+    });
+    const email = googleUser.getBasicProfile().getEmail();
+    return authenticate(email)
         .then(res => res.json())
-        .then(({ exists }: { exists: boolean }) => exists)
+        .then(({ exists }: { exists: boolean }) => {
+            if (exists)
+                cookie.set("user_exists", Boolean(true).toString(), {
+                    expires: new Date(expiresAt),
+                    sameSite: "strict"
+                });
+            return exists;
+        })
         .catch(console.error);
 };
 
-interface Props {
-    loading: boolean;
-    setLoading: (b: boolean) => void;
-}
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         card: {
@@ -111,13 +120,25 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     })
 );
-const LoginPage: NextPage<Props> = ({ setLoading }) => {
+const LoginPage: NextPage<PageProps> = ({
+    loading,
+    setLoading,
+    pathLoading
+}) => {
     const router = useRouter();
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
+    React.useEffect(() => {
+        const token = cookie.get("access_token");
+        const exists = cookie.get("user_exists");
+        if (!token) {
+            return;
+        }
+        if (!exists) {
+            router.replace("/megatreopuz/createUser");
+            return;
+        }
+        router.replace("/megatreopuz/dashboard");
+    }, []);
     return (
         <section className={classes.container}>
             <Card className={classes.card}>
@@ -139,7 +160,8 @@ const LoginPage: NextPage<Props> = ({ setLoading }) => {
                 <CardContent className={classes.signin}>
                     <Grid container item alignItems="center" justify="center">
                         <GoogleLogin
-                            clientId="65422568192-gsadmvg60atvtnpqvs3t0r43f213sgme.apps.googleusercontent.com"
+                            disabled={loading || pathLoading}
+                            clientId={`${process.env.CLIENT_ID}`}
                             onSuccess={async (
                                 googleUser:
                                     | GoogleLoginResponseOffline
