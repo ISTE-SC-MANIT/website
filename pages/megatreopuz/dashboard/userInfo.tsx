@@ -13,15 +13,25 @@ import {
     FormControlLabel,
     Switch,
     Button,
-    Fade
+    Fade,
+    Divider,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    DialogActions
 } from "@material-ui/core";
 import Menu from "../../../components/megatreopuz/menu";
 import { Formik } from "formik";
 import * as yup from "yup";
 import TextField from "../../../components/megatreopuz/customTextField";
 import { commit } from "../../../components/megatreopuz/relay/mutations/updateUser";
+import { commit as deleteUser } from "../../../components/megatreopuz/relay/mutations/deleteUser";
 import { Environment } from "react-relay";
-import environment from "../../../components/megatreopuz/relay/environment";
+import DeleteIcon from "@material-ui/icons/Delete";
+import clsx from "clsx";
+import { removeCookies } from "../../../components/megatreopuz/util";
+import { useRouter } from "next/router";
 interface Props {
     loading: boolean;
     setLoading: (b: boolean) => void;
@@ -47,7 +57,16 @@ const useStyles = makeStyles((theme: Theme) => ({
         paddingTop: "1rem",
         paddingBottom: "3rem"
     },
-    divider: {}
+    divider: {
+        margin: theme.spacing(3, 0)
+    },
+    paperButton: {
+        cursor: "pointer",
+        transition: "opacity 300ms",
+        "&:hover": {
+            opacity: 0.7
+        }
+    }
 }));
 
 const schema = yup.object({
@@ -70,6 +89,57 @@ const getInitialValues = (viewer: AppViewerQueryResponse["viewer"]) => {
     };
 };
 
+interface DialogProps {
+    open: boolean;
+    deleteUser: () => void;
+    onClose: () => void;
+}
+
+const DeleteDialog: React.FunctionComponent<DialogProps> = ({
+    open,
+    deleteUser,
+    onClose
+}) => {
+    return (
+        <Dialog
+            open={open}
+            onClose={onClose}
+            aria-labelledby="delete-dialog-title"
+            aria-describedby="delete-dialog-description"
+        >
+            <DialogTitle id="Delete-dialog-title">
+                Delete Account Permanently?
+            </DialogTitle>
+            <DialogContent>
+                <DialogContentText id="delete-dialog-description">
+                    This is a non reversible action. All your data and progress
+                    will be deleted. Proceed if that is what you want.
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button
+                    onClick={() => {
+                        deleteUser();
+                        onClose();
+                    }}
+                    color="primary"
+                    variant="contained"
+                >
+                    Delete
+                </Button>
+                <Button
+                    onClick={onClose}
+                    color="primary"
+                    variant="outlined"
+                    autoFocus
+                >
+                    Cancel
+                </Button>
+            </DialogActions>
+        </Dialog>
+    );
+};
+
 const Dashboard: NextPage<Props> = ({ viewer, environment, setLoading }) => {
     if (!viewer) return null;
     const classes = useStyles();
@@ -77,8 +147,8 @@ const Dashboard: NextPage<Props> = ({ viewer, environment, setLoading }) => {
     const initialValues = React.useMemo(() => getInitialValues(viewer), [
         viewer
     ]);
-
-    console.log(viewer);
+    const [deleteDialog, setDelete] = React.useState<boolean>(false);
+    const router = useRouter();
     return (
         <NoSsr>
             <Menu viewer={viewer} active={"User Info"} />
@@ -130,6 +200,24 @@ const Dashboard: NextPage<Props> = ({ viewer, environment, setLoading }) => {
             >
                 {({ handleReset, submitForm }) => (
                     <Container maxWidth="md" className={classes.container}>
+                        <DeleteDialog
+                            deleteUser={() => {
+                                setLoading(true);
+                                deleteUser(environment, {
+                                    onError: err => {
+                                        console.error(err.message);
+                                        setLoading(false);
+                                    },
+                                    onCompleted: () => {
+                                        setLoading(false);
+                                        removeCookies();
+                                        router.push("/megatreopuz/signIn");
+                                    }
+                                });
+                            }}
+                            open={deleteDialog}
+                            onClose={() => setDelete(false)}
+                        />
                         <Grid container spacing={3} justify="center">
                             <Grid item xs={10} sm={6} md={4}>
                                 <Paper className={classes.paper}>
@@ -284,6 +372,26 @@ const Dashboard: NextPage<Props> = ({ viewer, environment, setLoading }) => {
                                         color="textSecondary"
                                     >
                                         Country
+                                    </Typography>
+                                </Paper>
+                            </Grid>
+                        </Grid>
+                        <Divider className={classes.divider} />
+                        <Grid container alignItems="center" justify="center">
+                            <Grid item xs={10} sm={6} md={4}>
+                                <Paper
+                                    onClick={() => setDelete(true)}
+                                    className={clsx(
+                                        classes.paper,
+                                        classes.paperButton
+                                    )}
+                                >
+                                    <DeleteIcon
+                                        color="error"
+                                        className={classes.icon}
+                                    />
+                                    <Typography variant="caption" color="error">
+                                        Delete User
                                     </Typography>
                                 </Paper>
                             </Grid>

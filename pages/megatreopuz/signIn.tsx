@@ -36,8 +36,6 @@ const authenticate = (email: string) => {
     });
 };
 
-
-
 const checkUser = (
     googleUser: GoogleLoginResponseOffline | GoogleLoginResponse
 ): Promise<boolean | void> => {

@@ -1,5 +1,5 @@
 import { UserInput } from "./../__generated__/updateUserMutation.graphql";
-import { Environment, Store, RecordSourceSelectorProxy } from "relay-runtime";
+import { Environment,  RecordSourceSelectorProxy } from "relay-runtime";
 import { graphql, commitMutation } from "react-relay";
 
 const mutation = graphql`

@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "relay": "rm -rf ./components/megatreopuz/relay/__generated__ && npx relay-compiler --config=\"./relay.config.js\"",
+        "relay": "npx relay-compiler --config=\"./relay.config.js\"",
         "get-schema": "graphql get-schema",
         "lint": "eslint pages --ext .ts,.tsx components --ext .ts,.tsx",
         "format": "prettier --write \"{pages,components}/**/*.{ts,tsx}\"",

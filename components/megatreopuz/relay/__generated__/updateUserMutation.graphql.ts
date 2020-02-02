@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-/* @relayHash 3321f362739f431f82b67c15c55ebe7c */
+/* @relayHash e7f8d8c98c6c198d0a6bd910dbb88e7a */
 
 import { ConcreteRequest } from "relay-runtime";
 export type UserInput = {
@@ -14,6 +14,7 @@ export type updateUserMutationVariables = {
 };
 export type updateUserMutationResponse = {
     readonly updateUser: {
+        readonly id: string;
         readonly college: string;
         readonly phone: string;
         readonly year: string;
@@ -32,6 +33,7 @@ mutation updateUserMutation(
   $user: UserInput!
 ) {
   updateUser(userInfo: $user) {
+    id
     college
     phone
     year
@@ -65,6 +67,13 @@ v1 = [
     "concreteType": "User",
     "plural": false,
     "selections": [
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "id",
+        "args": null,
+        "storageKey": null
+      },
       {
         "kind": "ScalarField",
         "alias": null,
@@ -116,10 +125,10 @@ return {
     "operationKind": "mutation",
     "name": "updateUserMutation",
     "id": null,
-    "text": "mutation updateUserMutation(\n  $user: UserInput!\n) {\n  updateUser(userInfo: $user) {\n    college\n    phone\n    year\n    country\n  }\n}\n",
+    "text": "mutation updateUserMutation(\n  $user: UserInput!\n) {\n  updateUser(userInfo: $user) {\n    id\n    college\n    phone\n    year\n    country\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '0317cf6cb442a733c6fd4115e19a001c';
+(node as any).hash = '1c9789cfa6cf937cb899847cee9006d5';
 export default node;
