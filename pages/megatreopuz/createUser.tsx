@@ -102,23 +102,34 @@ const CreateUser: NextPage<Props> = ({ loading, setLoading }) => {
                                     username
                                 })
                             })
-                                .then(() => {
-                                    setLoading(false);
+                                .then(response => {
                                     setSubmitting(false);
-                                    cookie.set(
-                                        "user_exists",
-                                        Boolean(true).toString(),
-                                        {
-                                            expires: new Date(
-                                                Number.parseInt(
-                                                    cookie.get("expires_at") ||
-                                                        "0"
-                                                )
-                                            ),
-                                            sameSite: "strict"
-                                        }
-                                    );
-                                    router.replace("/megatreopuz/dashboard");
+
+                                    if (response.status === 201) {
+                                        cookie.set(
+                                            "user_exists",
+                                            Boolean(true).toString(),
+                                            {
+                                                expires: new Date(
+                                                    Number.parseInt(
+                                                        cookie.get(
+                                                            "expires_at"
+                                                        ) || "0"
+                                                    )
+                                                ),
+                                                sameSite: "strict"
+                                            }
+                                        );
+                                        setTimeout(() => {
+                                            router.replace(
+                                                "/megatreopuz/dashboard"
+                                            );
+                                            setLoading(false);
+                                        }, 500);
+                                    } else {
+                                        setLoading(false);
+                                        console.error(response.statusText);
+                                    }
                                 })
                                 .catch((err: Error) => {
                                     setLoading(false);
@@ -126,78 +137,80 @@ const CreateUser: NextPage<Props> = ({ loading, setLoading }) => {
                                 });
                         }}
                     >
-                        <Form>
-                            <Typography
-                                align="center"
-                                variant="h3"
-                                component="h1"
-                                gutterBottom
-                            >
-                                Sign Up
-                            </Typography>
-                            <CardContent>
-                                <Divider />
-                            </CardContent>
-                            <Grid container spacing={1}>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        fullWidth
-                                        name="username"
-                                        label="Username"
-                                        variant="outlined"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        fullWidth
-                                        name="college"
-                                        label="College"
-                                        variant="outlined"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        fullWidth
-                                        type="number"
-                                        name="year"
-                                        label="Year"
-                                        variant="outlined"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        fullWidth
-                                        name="country"
-                                        label="Country"
-                                        variant="outlined"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        fullWidth
-                                        name="phone"
-                                        label="Phone"
-                                        variant="outlined"
-                                    />
-                                </Grid>
-                                <Grid
-                                    item
-                                    xs={12}
-                                    container
-                                    alignItems="center"
-                                    justify="center"
+                        {({ submitForm }) => (
+                            <>
+                                <Typography
+                                    align="center"
+                                    variant="h3"
+                                    component="h1"
+                                    gutterBottom
                                 >
-                                    <Button
-                                        disabled={loading}
-                                        type="submit"
-                                        variant="contained"
-                                        color="primary"
+                                    Sign Up
+                                </Typography>
+                                <CardContent>
+                                    <Divider />
+                                </CardContent>
+                                <Grid container spacing={1}>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            name="username"
+                                            label="Username"
+                                            variant="outlined"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            name="college"
+                                            label="College"
+                                            variant="outlined"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            type="number"
+                                            name="year"
+                                            label="Year"
+                                            variant="outlined"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            name="country"
+                                            label="Country"
+                                            variant="outlined"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            fullWidth
+                                            name="phone"
+                                            label="Phone"
+                                            variant="outlined"
+                                        />
+                                    </Grid>
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        container
+                                        alignItems="center"
+                                        justify="center"
                                     >
-                                        Submit
-                                    </Button>
+                                        <Button
+                                            disabled={loading}
+                                            onClick={() => submitForm()}
+                                            variant="contained"
+                                            color="primary"
+                                        >
+                                            Submit
+                                        </Button>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Form>
+                            </>
+                        )}
                     </Formik>
                 </Container>
             </Card>
