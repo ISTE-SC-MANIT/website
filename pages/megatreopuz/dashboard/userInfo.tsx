@@ -178,7 +178,7 @@ const Dashboard: NextPage<Props> = ({ viewer, environment, setLoading }) => {
                         {
                             college: values.college,
                             phone: values.phone,
-                            year: values.year.toString(),
+                            year: values.year,
                             country: values.country
                         },
                         viewer.id,

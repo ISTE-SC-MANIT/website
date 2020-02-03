@@ -1,6 +1,13 @@
 import React from "react";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
-import { ThemeProvider, CssBaseline, LinearProgress } from "@material-ui/core";
+import {
+    ThemeProvider,
+    CssBaseline,
+    LinearProgress,
+    Snackbar,
+    Typography,
+    Paper
+} from "@material-ui/core";
 import { useRouter, Router } from "next/router";
 import LoadingScreen from "../components/loading";
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -14,11 +21,17 @@ const useStyles = makeStyles((theme: Theme) => ({
         left: 0,
         right: 0,
         zIndex: theme.zIndex.appBar + 1
+    },
+    error: {
+        background: theme.palette.error.main,
+        color: theme.palette.error.contrastText,
+        padding: theme.spacing(1, 3)
     }
 }));
 
 export interface PageProps {
     loading: boolean;
+    showError: (msg: string) => void;
     setLoading: (b: boolean) => void;
     pathLoading: boolean;
 }
@@ -37,6 +50,7 @@ const MyApp = ({
     const first = paths[1];
     const second = paths[2];
 
+    /* Loading theme */
     React.useEffect(() => {
         switch (first) {
             case "":
@@ -63,18 +77,27 @@ const MyApp = ({
         }
     }, []);
 
+    /* Relay and Graphql */
     const [useMegatreopuz, setMegatreopuz] = React.useState<boolean>(false);
     React.useEffect(() => {
         if (first === "megatreopuz" && second === "dashboard")
             setMegatreopuz(true);
     }, [first, second]);
 
+    /* Page loading animation */
     const [routeChange, setRouteChange] = React.useState<boolean>(false);
-
     Router.events.on("routeChangeStart", () => setRouteChange(true));
     Router.events.on("routeChangeComplete", () => setRouteChange(false));
     Router.events.on("routeChangeError", () => setRouteChange(false));
     const [loading, setLoading] = React.useState<boolean>(false);
+
+    const [error, setError] = React.useState<boolean>(false);
+    const [errMsg, setErrMsg] = React.useState<React.ReactNode>("");
+
+    const showError = (msg: string) => {
+        setError(true);
+        setErrMsg(msg);
+    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -88,6 +111,16 @@ const MyApp = ({
             )}
             {/* Loading screen */}
             <LoadingScreen loading={loading} />
+            {/* Error Snackbar */}
+            <Snackbar
+                open={error}
+                autoHideDuration={6000}
+                onClose={() => setError(false)}
+            >
+                <Paper elevation={3} className={classes.error}>
+                    <Typography>{errMsg}</Typography>
+                </Paper>
+            </Snackbar>
             {!useMegatreopuz ? (
                 <Component
                     {...pageProps}
@@ -111,7 +144,6 @@ const MyApp = ({
                                 admin
                                 lastAnsweredQuestion
                                 totalQuestionsAnswered
-                                lastAnswerTime
                                 rank
                             }
                         }
@@ -124,6 +156,7 @@ const MyApp = ({
                                 <Component
                                     viewer={props.viewer}
                                     environment={environment}
+                                    showError={showError}
                                     {...pageProps}
                                     {...{
                                         loading,
