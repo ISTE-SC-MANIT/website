@@ -71,7 +71,7 @@ const Dashboard: NextPage<Props> = ({ showError, viewer }) => {
                             </Typography>
                         </Paper>
                     </Grid>
-                    <Grid item xs={10} sm={6} md={4}>
+                    {/* <Grid item xs={10} sm={6} md={4}>
                         <Paper
                             onClick={() =>
                                 router.push("/megatreopuz/dashboard/help")
@@ -106,7 +106,7 @@ const Dashboard: NextPage<Props> = ({ showError, viewer }) => {
                                 Leaderboard
                             </Typography>
                         </Paper>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             </Container>
             <Divider className={classes.divider} />

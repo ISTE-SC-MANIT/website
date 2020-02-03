@@ -109,25 +109,12 @@ const Menu: React.FunctionComponent<Props> = ({ viewer, logout }) => {
                             </ListItem>
                         );
                     })}
-                    <GoogleLogout
-                        clientId={process.env.CLIENT_ID || ""}
-                        render={props => (
-                            <ListItem
-                                button
-                                onClick={() => {
-                                    props.onClick();
-                                }}
-                            >
-                                <ListItemIcon>
-                                    <ExitToAppIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Log Out"></ListItemText>
-                            </ListItem>
-                        )}
-                        onLogoutSuccess={() => {
-                            logout();
-                        }}
-                    />
+                    <ListItem button onClick={logout}>
+                        <ListItemIcon>
+                            <ExitToAppIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Log Out"></ListItemText>
+                    </ListItem>
                 </List>
             </Drawer>
         </>
