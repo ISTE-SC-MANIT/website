@@ -19,6 +19,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import { useRouter } from "next/router";
 import FaceIcon from "@material-ui/icons/Face";
+import { GoogleLogout } from "react-google-login";
+import { removeCookies } from "./util";
+
 const useStyles = makeStyles((theme: Theme) => ({
     avatar: {
         background: theme.palette.secondary.main
@@ -82,6 +85,18 @@ const Menu: React.FunctionComponent<Props> = ({ viewer, active }) => {
                                     <Typography variant="subtitle1">
                                         {viewer.userName}
                                     </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <GoogleLogout
+                                        clientId={process.env.CLIENT_ID || ""}
+                                        buttonText="Logout"
+                                        onLogoutSuccess={() => {
+                                            removeCookies();
+                                            router.replace(
+                                                "/megatreopuz/signIn"
+                                            );
+                                        }}
+                                    ></GoogleLogout>
                                 </Grid>
                             </Grid>
                         </Grid>

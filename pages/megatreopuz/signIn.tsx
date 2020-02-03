@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import GoogleLogin, {
     GoogleLoginResponse,
     GoogleLoginResponseOffline
@@ -21,51 +21,51 @@ import {
 } from "@material-ui/core";
 import cookie from "js-cookie";
 import { PageProps } from "../_app";
-import { reloadToken } from "../../components/megatreopuz/util";
-
-const authenticate = (email: string) => {
-    return fetch(`${process.env.MEGATREOPUZ_SERVER}/authenticate`, {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            email
-        })
-    });
-};
 
 const checkUser = (
     googleUser: GoogleLoginResponseOffline | GoogleLoginResponse
-): Promise<boolean | void> => {
-    // No SSR
+): Promise<boolean> => {
     if ("code" in googleUser) return Promise.resolve(false);
-    // Find the access_token
-    const token = googleUser.getAuthResponse().id_token;
-    const expiresAt = googleUser.getAuthResponse().expires_at;
-    cookie.set("access_token", token, {
-        expires: new Date(expiresAt),
-        sameSite: "strict"
-    });
-    cookie.set("expires_at", expiresAt.toString(), {
-        expires: new Date(expiresAt),
-        sameSite: "strict"
-    });
-    const email = googleUser.getBasicProfile().getEmail();
-    return authenticate(email)
-        .then(res => res.json())
-        .then(({ exists }: { exists: boolean }) => {
-            if (exists)
-                cookie.set("user_exists", Boolean(true).toString(), {
-                    expires: new Date(expiresAt),
-                    sameSite: "strict"
-                });
-            const timeToExpire = expiresAt - Date.now() - 60 * 60 * 100;
-            setTimeout(() => reloadToken(googleUser), timeToExpire);
-            return exists;
+    else {
+        const {
+            profileObj: { email }
+        } = googleUser;
+        const tokenCred = googleUser.getAuthResponse();
+        console.log(tokenCred);
+
+        return fetch(`${process.env.MEGATREOPUZ_SERVER}/authenticate`, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email
+            })
         })
-        .catch(console.error);
+            .then(response => {
+                if (response.status === 200) {
+                    cookie.set("access_token", tokenCred.access_token, {
+                        expires: new Date(tokenCred.expires_at)
+                    });
+                    cookie.set("expires_at", tokenCred.expires_at.toString(), {
+                        expires: new Date(tokenCred.expires_at)
+                    });
+                    return response;
+                } else
+                    throw new Error(
+                        `${response.status}: ${response.statusText}`
+                    );
+            })
+            .then(response => response.json())
+            .then(({ exists }) => {
+                if (exists)
+                    cookie.set("user_exists", Boolean(true).toString(), {
+                        expires: new Date(tokenCred.expires_at)
+                    });
+                return exists as boolean;
+            });
+    }
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -125,22 +125,12 @@ const useStyles = makeStyles((theme: Theme) =>
 const LoginPage: NextPage<PageProps> = ({
     loading,
     setLoading,
-    pathLoading
+    pathLoading,
+    showError
 }) => {
     const router = useRouter();
     const classes = useStyles();
-    React.useEffect(() => {
-        const token = cookie.get("access_token");
-        const exists = cookie.get("user_exists");
-        if (!token) {
-            return;
-        }
-        if (!exists) {
-            router.replace("/megatreopuz/createUser");
-            return;
-        }
-        router.replace("/megatreopuz/dashboard");
-    }, []);
+
     return (
         <section className={classes.container}>
             <Card className={classes.card}>
@@ -169,14 +159,24 @@ const LoginPage: NextPage<PageProps> = ({
                                     | GoogleLoginResponseOffline
                                     | GoogleLoginResponse
                             ) => {
-                                setLoading(true);
-                                const response = await checkUser(googleUser);
-                                setLoading(false);
-                                if (response)
-                                    router.replace("/megatreopuz/dashboard");
-                                else router.replace("/megatreopuz/createUser");
+                                try {
+                                    setLoading(true);
+                                    const response = await checkUser(
+                                        googleUser
+                                    );
+                                    setLoading(false);
+                                    if (response) {
+                                        router.replace("/megatreopuz/thanks");
+                                    } else
+                                        router.replace(
+                                            "/megatreopuz/createUser"
+                                        );
+                                } catch (error) {
+                                    showError(error);
+                                    setLoading(false);
+                                }
                             }}
-                            onFailure={console.error}
+                            onFailure={showError}
                         />
                     </Grid>
                     <Box pt={2} pb={1} pl={1} pr={1}>

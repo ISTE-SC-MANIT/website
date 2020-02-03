@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface PageProps {
     loading: boolean;
-    showError: (msg: string) => void;
+    showError: (e: Error) => void;
     setLoading: (b: boolean) => void;
     pathLoading: boolean;
 }
@@ -94,11 +94,11 @@ const MyApp = ({
     const [error, setError] = React.useState<boolean>(false);
     const [errMsg, setErrMsg] = React.useState<React.ReactNode>("");
 
-    const showError = (msg: string) => {
+    const showError = (e: Error) => {
         setError(true);
-        setErrMsg(msg);
+        setErrMsg(e.message);
     };
-
+    
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -123,6 +123,7 @@ const MyApp = ({
             </Snackbar>
             {!useMegatreopuz ? (
                 <Component
+                    showError={showError}
                     {...pageProps}
                     {...{ loading, setLoading, pathLoading: routeChange }}
                 />
