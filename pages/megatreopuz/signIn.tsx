@@ -21,24 +21,12 @@ import {
 } from "@material-ui/core";
 import cookie from "js-cookie";
 import { PageProps } from "../_app";
-import { reloadToken } from "../../components/megatreopuz/util";
-
-const authenticate = (email: string) => {
-    return fetch(`${process.env.MEGATREOPUZ_SERVER}/authenticate`, {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            email
-        })
-    });
-};
+import { removeCookies } from "../../components/megatreopuz/util";
+import { makeEnvironment } from "../../components/megatreopuz/relay/environment";
 
 const checkUser = (
     googleUser: GoogleLoginResponseOffline | GoogleLoginResponse
-): Promise<boolean | void> => {
+): Promise<boolean> => {
     // No SSR
     if ("code" in googleUser) return Promise.resolve(false);
     // Find the access_token
@@ -53,19 +41,31 @@ const checkUser = (
         sameSite: "strict"
     });
     const email = googleUser.getBasicProfile().getEmail();
-    return authenticate(email)
-        .then(res => res.json())
-        .then(({ exists }: { exists: boolean }) => {
+    return fetch(`${process.env.MEGATREOPUZ_SERVER}/authenticate`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email
+        })
+    })
+        .then(response => {
+            if (response.status !== 200) {
+                throw new Error(`${response.statusText}`);
+            }
+            return response;
+        })
+        .then(response => response.json())
+        .then(({ exists }) => {
             if (exists)
-                cookie.set("user_exists", Boolean(true).toString(), {
+                cookie.set("user_exists", "true", {
                     expires: new Date(expiresAt),
                     sameSite: "strict"
                 });
-            const timeToExpire = expiresAt - Date.now() - 60 * 60 * 100;
-            setTimeout(() => reloadToken(googleUser), timeToExpire);
-            return exists;
-        })
-        .catch(console.error);
+            return exists as boolean;
+        });
 };
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -124,7 +124,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 const LoginPage: NextPage<PageProps> = ({
     loading,
+    showError,
     setLoading,
+    setEnvironment,
     pathLoading
 }) => {
     const router = useRouter();
@@ -132,14 +134,19 @@ const LoginPage: NextPage<PageProps> = ({
     React.useEffect(() => {
         const token = cookie.get("access_token");
         const exists = cookie.get("user_exists");
-        if (!token) {
+        const expiresAt = parseInt(cookie.get("expires_at") || "0");
+
+        if (!token || !expiresAt) {
             return;
         }
         if (!exists) {
             router.replace("/megatreopuz/createUser");
             return;
         }
-        router.replace("/megatreopuz/dashboard");
+        if (setEnvironment) {
+            setEnvironment(makeEnvironment());
+        }
+        setTimeout(() => {router.replace("/megatreopuz/dashboard")});
     }, []);
     return (
         <section className={classes.container}>
@@ -169,14 +176,26 @@ const LoginPage: NextPage<PageProps> = ({
                                     | GoogleLoginResponseOffline
                                     | GoogleLoginResponse
                             ) => {
-                                setLoading(true);
-                                const response = await checkUser(googleUser);
-                                setLoading(false);
-                                if (response)
-                                    router.replace("/megatreopuz/dashboard");
-                                else router.replace("/megatreopuz/createUser");
+                                try {
+                                    setLoading(true);
+                                    const response = await checkUser(
+                                        googleUser
+                                    );
+                                    setLoading(false);
+                                    if (response)
+                                        router.replace(
+                                            "/megatreopuz/dashboard"
+                                        );
+                                    else
+                                        router.replace(
+                                            "/megatreopuz/createUser"
+                                        );
+                                } catch (error) {
+                                    showError(error);
+                                    setLoading(false);
+                                }
                             }}
-                            onFailure={console.error}
+                            onFailure={showError}
                         />
                     </Grid>
                     <Box pt={2} pb={1} pl={1} pr={1}>

@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import { AppViewerQueryResponse } from "../../../components/megatreopuz/relay/__generated__/AppViewerQuery.graphql";
 import {
     NoSsr,
@@ -18,11 +18,8 @@ import GamepadIcon from "@material-ui/icons/GamepadOutlined";
 import RankIcon from "@material-ui/icons/SupervisorAccount";
 import clsx from "clsx";
 import { useRouter } from "next/router";
-interface Props {
-    loading: boolean;
-    setLoading: (b: boolean) => void;
-    viewer: AppViewerQueryResponse["viewer"];
-}
+import { PageProps } from "../../_app";
+import cookie from "js-cookie";
 
 const useStyles = makeStyles((theme: Theme) => ({
     icon: {
@@ -49,7 +46,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     divider: {}
 }));
 
-const Dashboard: NextPage<Props> = ({ viewer }) => {
+interface Props extends PageProps {
+    viewer: AppViewerQueryResponse["viewer"];
+}
+
+const Dashboard: NextPage<Props> = ({ showError, viewer }) => {
     if (!viewer) return null;
     const classes = useStyles();
     const router = useRouter();

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import {
     ThemeProvider,
@@ -11,16 +11,18 @@ import {
 import { useRouter, Router } from "next/router";
 import LoadingScreen from "../components/loading";
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { QueryRenderer, graphql } from "react-relay";
-import environment from "../components/megatreopuz/relay/environment";
-import { AppViewerQuery } from "../components/megatreopuz/relay/__generated__/AppViewerQuery.graphql";
+import { QueryRenderer, graphql, Environment } from "react-relay";
+import {
+    AppViewerQuery,
+    AppViewerQueryResponse
+} from "../components/megatreopuz/relay/__generated__/AppViewerQuery.graphql";
 const useStyles = makeStyles((theme: Theme) => ({
     linearLoading: {
         position: "fixed",
         top: 0,
         left: 0,
         right: 0,
-        zIndex: theme.zIndex.appBar + 1
+        zIndex: theme.zIndex.modal + 1
     },
     error: {
         background: theme.palette.error.main,
@@ -31,10 +33,23 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface PageProps {
     loading: boolean;
-    showError: (msg: string) => void;
+    showError: (e: Error) => void;
     setLoading: (b: boolean) => void;
     pathLoading: boolean;
+    setEnvironment?: (e: Environment) => void;
 }
+
+export interface MegatreopuzPageProps extends PageProps {
+    environment: Environment | null;
+    contestActive: boolean;
+}
+
+const Dummy: React.FunctionComponent = () => {
+    useEffect(() => {
+        window.open("/megatreopuz/signIn", "_self");
+    }, []);
+    return null;
+};
 
 const MyApp = ({
     Component,
@@ -90,13 +105,13 @@ const MyApp = ({
     Router.events.on("routeChangeComplete", () => setRouteChange(false));
     Router.events.on("routeChangeError", () => setRouteChange(false));
     const [loading, setLoading] = React.useState<boolean>(false);
-
+    const [environment, setEnv] = React.useState<Environment | null>(null);
     const [error, setError] = React.useState<boolean>(false);
     const [errMsg, setErrMsg] = React.useState<React.ReactNode>("");
 
-    const showError = (msg: string) => {
+    const showError = (error: Error) => {
         setError(true);
-        setErrMsg(msg);
+        setErrMsg(error.message);
     };
 
     return (
@@ -123,14 +138,16 @@ const MyApp = ({
             </Snackbar>
             {!useMegatreopuz ? (
                 <Component
+                    setEnvironment={setEnv}
                     {...pageProps}
                     {...{ loading, setLoading, pathLoading: routeChange }}
                 />
-            ) : (
+            ) : environment ? (
                 <QueryRenderer<AppViewerQuery>
                     environment={environment}
                     query={graphql`
                         query AppViewerQuery {
+                            active: getState
                             viewer {
                                 id
                                 userName
@@ -149,11 +166,21 @@ const MyApp = ({
                         }
                     `}
                     variables={{}}
-                    render={({ error, props }) => {
-                        if (error) return <h1>{error.message}</h1>;
-                        else if (props) {
+                    render={({
+                        error,
+                        props
+                    }: {
+                        error: Error | null;
+                        props: AppViewerQuery["response"] | null;
+                    }) => {
+                        if (error) {
+                            showError(error);
+                            return null;
+                        } else if (props) {
                             return (
                                 <Component
+                                    contestActive={props.active}
+                                    setEnvironment={setEnv}
                                     viewer={props.viewer}
                                     environment={environment}
                                     showError={showError}
@@ -169,6 +196,8 @@ const MyApp = ({
                         return <LoadingScreen loading={true} />;
                     }}
                 />
+            ) : (
+                <Dummy />
             )}
         </ThemeProvider>
     );

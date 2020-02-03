@@ -28,4 +28,10 @@ const environment = new Environment({
     store: new Store(new RecordSource())
 });
 
+export const makeEnvironment = () =>
+    new Environment({
+        network: network,
+        store: new Store(new RecordSource())
+    });
+
 export default environment;

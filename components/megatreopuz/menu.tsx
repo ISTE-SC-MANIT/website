@@ -1,4 +1,5 @@
 import React from "react";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import {
     AppBar,
     Toolbar,
@@ -11,7 +12,8 @@ import {
     ListItem,
     ListItemText,
     List,
-    ListItemIcon
+    ListItemIcon,
+    Button
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { AppViewerQueryResponse } from "./relay/__generated__/AppViewerQuery.graphql";
@@ -19,6 +21,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import { useRouter } from "next/router";
 import FaceIcon from "@material-ui/icons/Face";
+import { GoogleLogout } from "react-google-login";
+import { removeCookies } from "./util";
 const useStyles = makeStyles((theme: Theme) => ({
     avatar: {
         background: theme.palette.secondary.main
@@ -103,6 +107,21 @@ const Menu: React.FunctionComponent<Props> = ({ viewer, active }) => {
                             </ListItem>
                         );
                     })}
+                    <GoogleLogout
+                        clientId={process.env.CLIENT_ID || ""}
+                        render={props => (
+                            <ListItem button {...props}>
+                                <ListItemIcon>
+                                    <ExitToAppIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Log Out"></ListItemText>
+                            </ListItem>
+                        )}
+                        onLogoutSuccess={() => {
+                            removeCookies();
+                            router.push("/megatreopuz/signIn");
+                        }}
+                    />
                 </List>
             </Drawer>
         </>

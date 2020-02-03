@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 import TextField from "../../components/megatreopuz/customTextField";
@@ -11,14 +11,13 @@ import {
     Card,
     CardContent,
     makeStyles,
-    Divider
+    Divider,
+    Theme
 } from "@material-ui/core";
 import { useRouter } from "next/router";
 import cookie from "js-cookie";
-interface Props {
-    loading: boolean;
-    setLoading: (b: boolean) => void;
-}
+import { PageProps } from "../_app";
+import { makeEnvironment } from "../../components/megatreopuz/relay/environment";
 
 const initialValues = {
     username: "",
@@ -40,8 +39,9 @@ const schema = yup.object({
     country: yup.string().required("Required")
 });
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
     card: {
+        padding: theme.spacing(2),
         maxWidth: 445,
         margin: "auto",
         backgroundColor: "rgb(255,255,333)",
@@ -61,11 +61,33 @@ const useStyles = makeStyles({
         backgroundAttachment: "fixed",
         backgroundSize: " cover"
     }
-});
+}));
 
-const CreateUser: NextPage<Props> = ({ loading, setLoading }) => {
+const CreateUser: NextPage<PageProps> = ({
+    showError,
+    loading,
+    setLoading,
+    setEnvironment
+}) => {
     const router = useRouter();
     const classes = useStyles();
+
+    useEffect(() => {
+        const token = cookie.get("access_token");
+        const expiresAt = cookie.get("expires_at");
+        const exists = cookie.get("user_exists");
+        if (!token || !expiresAt) {
+            showError(new Error("Please sign in using google"));
+            router.push("/megatreopuz/signIn");
+        } else if (exists === "true") {
+            if (setEnvironment) {
+                setEnvironment(makeEnvironment());
+            }
+            setTimeout(() => {
+                router.replace("/megatreopuz/dashboard");
+            });
+        }
+    }, []);
 
     return (
         <section className={classes.container}>
@@ -120,12 +142,10 @@ const CreateUser: NextPage<Props> = ({ loading, setLoading }) => {
                                                 sameSite: "strict"
                                             }
                                         );
-                                        setTimeout(() => {
-                                            router.replace(
-                                                "/megatreopuz/dashboard"
-                                            );
-                                            setLoading(false);
-                                        }, 500);
+                                        setLoading(false);
+                                        router.replace(
+                                            "/megatreopuz/dashboard"
+                                        );
                                     } else {
                                         setLoading(false);
                                         console.error(response.statusText);
