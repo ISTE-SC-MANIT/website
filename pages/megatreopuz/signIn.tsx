@@ -146,7 +146,9 @@ const LoginPage: NextPage<PageProps> = ({
         if (setEnvironment) {
             setEnvironment(makeEnvironment());
         }
-        setTimeout(() => {router.replace("/megatreopuz/dashboard")});
+        setTimeout(() => {
+            router.replace("/megatreopuz/dashboard");
+        });
     }, []);
     return (
         <section className={classes.container}>
