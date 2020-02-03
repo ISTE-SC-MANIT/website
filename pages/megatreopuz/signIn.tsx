@@ -31,7 +31,6 @@ const checkUser = (
             profileObj: { email }
         } = googleUser;
         const tokenCred = googleUser.getAuthResponse();
-        console.log(tokenCred);
 
         return fetch(`${process.env.MEGATREOPUZ_SERVER}/authenticate`, {
             method: "POST",
@@ -45,7 +44,7 @@ const checkUser = (
         })
             .then(response => {
                 if (response.status === 200) {
-                    cookie.set("access_token", tokenCred.access_token, {
+                    cookie.set("access_token", tokenCred.id_token, {
                         expires: new Date(tokenCred.expires_at)
                     });
                     cookie.set("expires_at", tokenCred.expires_at.toString(), {

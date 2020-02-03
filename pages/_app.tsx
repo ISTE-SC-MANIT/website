@@ -98,7 +98,7 @@ const MyApp = ({
         setError(true);
         setErrMsg(e.message);
     };
-    
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />

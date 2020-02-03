@@ -11,14 +11,12 @@ import {
     Card,
     CardContent,
     makeStyles,
-    Divider
+    Divider,
+    Theme
 } from "@material-ui/core";
 import { useRouter } from "next/router";
 import cookie from "js-cookie";
-interface Props {
-    loading: boolean;
-    setLoading: (b: boolean) => void;
-}
+import { PageProps } from "../_app";
 
 const initialValues = {
     username: "",
@@ -40,9 +38,10 @@ const schema = yup.object({
     country: yup.string().required("Required")
 });
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
     card: {
         maxWidth: 445,
+        padding: theme.spacing(1),
         margin: "auto",
         backgroundColor: "rgb(255,255,333)",
         color: "orange"
@@ -61,11 +60,26 @@ const useStyles = makeStyles({
         backgroundAttachment: "fixed",
         backgroundSize: " cover"
     }
-});
+}));
 
-const CreateUser: NextPage<Props> = ({ loading, setLoading }) => {
+const CreateUser: NextPage<PageProps> = ({
+    loading,
+    setLoading,
+    showError
+}) => {
     const router = useRouter();
     const classes = useStyles();
+
+    React.useEffect(() => {
+        const token = cookie.get("access_token");
+
+        if (!token) {
+            showError(new Error("Invalid token. Please sign in using google"));
+            setLoading(false);
+            router.push("/megatreopuz/signIn");
+            return;
+        }
+    }, []);
 
     return (
         <section className={classes.container}>
@@ -80,13 +94,7 @@ const CreateUser: NextPage<Props> = ({ loading, setLoading }) => {
                         ) => {
                             setLoading(true);
                             const token = cookie.get("access_token");
-                            if (!token) {
-                                console.error(
-                                    "Invalid token. Please sign in using google"
-                                );
-                                setLoading(false);
-                                return;
-                            }
+
                             fetch(`${process.env.MEGATREOPUZ_SERVER}/signUp`, {
                                 method: "POST",
                                 headers: {
@@ -122,13 +130,17 @@ const CreateUser: NextPage<Props> = ({ loading, setLoading }) => {
                                         );
                                         setTimeout(() => {
                                             router.replace(
-                                                "/megatreopuz/dashboard"
+                                                "/megatreopuz/thanks"
                                             );
                                             setLoading(false);
                                         }, 500);
                                     } else {
                                         setLoading(false);
-                                        console.error(response.statusText);
+                                        showError(
+                                            new Error(
+                                                `${response.status} : ${response.statusText}`
+                                            )
+                                        );
                                     }
                                 })
                                 .catch((err: Error) => {
