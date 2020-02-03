@@ -32,6 +32,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import clsx from "clsx";
 import { removeCookies } from "../../../components/megatreopuz/util";
 import { useRouter } from "next/router";
+import { MegatreopuzPageProps } from "../../_app";
 interface Props {
     loading: boolean;
     setLoading: (b: boolean) => void;
@@ -140,7 +141,12 @@ const DeleteDialog: React.FunctionComponent<DialogProps> = ({
     );
 };
 
-const Dashboard: NextPage<Props> = ({ viewer, environment, setLoading }) => {
+const Dashboard: NextPage<MegatreopuzPageProps> = ({
+    viewer,
+    environment,
+    setLoading,
+    logout
+}) => {
     if (!viewer) return null;
     const classes = useStyles();
     const [edit, setEdit] = React.useState<boolean>(false);
@@ -148,10 +154,8 @@ const Dashboard: NextPage<Props> = ({ viewer, environment, setLoading }) => {
         viewer
     ]);
     const [deleteDialog, setDelete] = React.useState<boolean>(false);
-    const router = useRouter();
     return (
         <NoSsr>
-            <Menu viewer={viewer} active={"User Info"} />
             <Box mt={2}>
                 <Grid item container alignItems="center" justify="center">
                     <FormControlLabel
@@ -173,27 +177,28 @@ const Dashboard: NextPage<Props> = ({ viewer, environment, setLoading }) => {
                 validationSchema={schema}
                 onSubmit={(values, { setSubmitting }) => {
                     setLoading(true);
-                    commit(
-                        environment,
-                        {
-                            college: values.college,
-                            phone: values.phone,
-                            year: values.year,
-                            country: values.country
-                        },
-                        viewer.id,
-                        {
-                            onError: err => {
-                                console.error(err.message);
-                                setLoading(false);
-                                setSubmitting(false);
+                    environment &&
+                        commit(
+                            environment,
+                            {
+                                college: values.college,
+                                phone: values.phone,
+                                year: values.year,
+                                country: values.country
                             },
-                            onCompleted: () => {
-                                setLoading(false);
-                                setSubmitting(false);
+                            viewer.id,
+                            {
+                                onError: err => {
+                                    console.error(err.message);
+                                    setLoading(false);
+                                    setSubmitting(false);
+                                },
+                                onCompleted: () => {
+                                    setLoading(false);
+                                    setSubmitting(false);
+                                }
                             }
-                        }
-                    );
+                        );
                 }}
                 enableReinitialize
                 initialValues={initialValues}
@@ -203,17 +208,17 @@ const Dashboard: NextPage<Props> = ({ viewer, environment, setLoading }) => {
                         <DeleteDialog
                             deleteUser={() => {
                                 setLoading(true);
-                                deleteUser(environment, {
-                                    onError: err => {
-                                        console.error(err.message);
-                                        setLoading(false);
-                                    },
-                                    onCompleted: () => {
-                                        setLoading(false);
-                                        removeCookies();
-                                        router.push("/megatreopuz/signIn");
-                                    }
-                                });
+                                environment &&
+                                    deleteUser(environment, {
+                                        onError: err => {
+                                            console.error(err.message);
+                                            setLoading(false);
+                                        },
+                                        onCompleted: () => {
+                                            setLoading(false);
+                                            logout();
+                                        }
+                                    });
                             }}
                             open={deleteDialog}
                             onClose={() => setDelete(false)}

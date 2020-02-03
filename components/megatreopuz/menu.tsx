@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import {
     AppBar,
@@ -12,8 +12,7 @@ import {
     ListItem,
     ListItemText,
     List,
-    ListItemIcon,
-    Button
+    ListItemIcon
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { AppViewerQueryResponse } from "./relay/__generated__/AppViewerQuery.graphql";
@@ -23,6 +22,7 @@ import { useRouter } from "next/router";
 import FaceIcon from "@material-ui/icons/Face";
 import { GoogleLogout } from "react-google-login";
 import { removeCookies } from "./util";
+
 const useStyles = makeStyles((theme: Theme) => ({
     avatar: {
         background: theme.palette.secondary.main
@@ -40,8 +40,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface Props {
     viewer: AppViewerQueryResponse["viewer"];
-    active: string;
+    logout: () => void;
 }
+
 const Config = [
     {
         title: "Dashboard",
@@ -54,7 +55,8 @@ const Config = [
         path: "/megatreopuz/dashboard/userInfo"
     }
 ];
-const Menu: React.FunctionComponent<Props> = ({ viewer, active }) => {
+
+const Menu: React.FunctionComponent<Props> = ({ viewer, logout }) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState<boolean>(false);
     const router = useRouter();
@@ -98,7 +100,7 @@ const Menu: React.FunctionComponent<Props> = ({ viewer, active }) => {
                         return (
                             <ListItem
                                 onClick={() => router.push(path)}
-                                selected={active === title}
+                                selected={path === router.route}
                                 button
                                 key={title}
                             >
@@ -110,7 +112,12 @@ const Menu: React.FunctionComponent<Props> = ({ viewer, active }) => {
                     <GoogleLogout
                         clientId={process.env.CLIENT_ID || ""}
                         render={props => (
-                            <ListItem button {...props}>
+                            <ListItem
+                                button
+                                onClick={() => {
+                                    props.onClick();
+                                }}
+                            >
                                 <ListItemIcon>
                                     <ExitToAppIcon />
                                 </ListItemIcon>
@@ -118,8 +125,7 @@ const Menu: React.FunctionComponent<Props> = ({ viewer, active }) => {
                             </ListItem>
                         )}
                         onLogoutSuccess={() => {
-                            removeCookies();
-                            router.push("/megatreopuz/signIn");
+                            logout();
                         }}
                     />
                 </List>

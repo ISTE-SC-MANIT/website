@@ -1,6 +1,5 @@
-import { Environment, RecordSourceSelectorProxy } from "relay-runtime";
+import { Environment } from "relay-runtime";
 import { graphql, commitMutation } from "react-relay";
-import environment from "../environment";
 
 const mutation = graphql`
     mutation deleteUserMutation {

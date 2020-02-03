@@ -4,7 +4,6 @@ import cookie from "js-cookie";
 export function removeCookies() {
     cookie.remove("access_token");
     cookie.remove("expires_at");
-    cookie.remove("user_exists");
 }
 
 export async function reloadToken(user: GoogleLoginResponse) {

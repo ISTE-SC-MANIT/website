@@ -16,6 +16,10 @@ import {
     AppViewerQuery,
     AppViewerQueryResponse
 } from "../components/megatreopuz/relay/__generated__/AppViewerQuery.graphql";
+import Menu from "../components/megatreopuz/menu";
+import { removeCookies } from "../components/megatreopuz/util";
+import cookie from "js-cookie";
+import { makeEnvironment } from "../components/megatreopuz/relay/environment";
 const useStyles = makeStyles((theme: Theme) => ({
     linearLoading: {
         position: "fixed",
@@ -36,20 +40,14 @@ export interface PageProps {
     showError: (e: Error) => void;
     setLoading: (b: boolean) => void;
     pathLoading: boolean;
-    setEnvironment?: (e: Environment) => void;
 }
 
 export interface MegatreopuzPageProps extends PageProps {
     environment: Environment | null;
     contestActive: boolean;
+    logout: () => void;
+    viewer: AppViewerQueryResponse["viewer"];
 }
-
-const Dummy: React.FunctionComponent = () => {
-    useEffect(() => {
-        window.open("/megatreopuz/signIn", "_self");
-    }, []);
-    return null;
-};
 
 const MyApp = ({
     Component,
@@ -85,6 +83,7 @@ const MyApp = ({
                 break;
         }
     }, [first]);
+    /* Remove server injected style */
     React.useEffect(() => {
         const jssStyles = document.querySelector("#jss-server-side");
         if (jssStyles && jssStyles.parentNode) {
@@ -92,20 +91,16 @@ const MyApp = ({
         }
     }, []);
 
-    /* Relay and Graphql */
-    const [useMegatreopuz, setMegatreopuz] = React.useState<boolean>(false);
-    React.useEffect(() => {
-        if (first === "megatreopuz" && second === "dashboard")
-            setMegatreopuz(true);
-    }, [first, second]);
-
     /* Page loading animation */
     const [routeChange, setRouteChange] = React.useState<boolean>(false);
-    Router.events.on("routeChangeStart", () => setRouteChange(true));
+    Router.events.on("routeChangeStart", () => {
+        setRouteChange(true);
+    });
     Router.events.on("routeChangeComplete", () => setRouteChange(false));
     Router.events.on("routeChangeError", () => setRouteChange(false));
     const [loading, setLoading] = React.useState<boolean>(false);
-    const [environment, setEnv] = React.useState<Environment | null>(null);
+
+    /* Error reporting */
     const [error, setError] = React.useState<boolean>(false);
     const [errMsg, setErrMsg] = React.useState<React.ReactNode>("");
 
@@ -113,6 +108,55 @@ const MyApp = ({
         setError(true);
         setErrMsg(error.message);
     };
+
+    /* Relay and Graphql */
+    const [useMegatreopuz, setMegatreopuz] = React.useState<boolean>(false);
+    const TimeOut = React.useRef<any>();
+
+    let environment: Environment | null = React.useMemo(
+        () => makeEnvironment(),
+        [first, second]
+    );
+    /* Logging user out of megatreopuz */
+    const logout = React.useMemo(() => {
+        return () => {
+            removeCookies();
+            environment = null;
+            router.push("/megatreopuz/signIn");
+        };
+    }, []);
+
+    React.useEffect(() => {
+        if (first === "megatreopuz" && second === "dashboard") {
+            // Get the tokens
+            const token = cookie.get("access_token");
+            const expiresAt = parseInt(cookie.get("expires_at") || "0");
+
+            if (TimeOut.current) {
+                /* Cancel the previous timeout */
+                clearTimeout(TimeOut.current as number);
+            }
+            if (!token || !expiresAt || Date.now() > expiresAt) {
+                router.push("/megatreopuz/signIn");
+                return;
+            }
+            const timeToExpire = expiresAt - Date.now();
+            TimeOut.current = setTimeout(() => {
+                showError(
+                    new Error("Google Login has timed out. Please log in again")
+                );
+                console.log("Logging out because expired");
+                logout();
+            }, timeToExpire);
+            setMegatreopuz(true);
+        } else {
+            setMegatreopuz(false);
+            if (TimeOut.current) {
+                /* Cancel the previous timeout */
+                clearTimeout(TimeOut.current as number);
+            }
+        }
+    }, [first, second]);
 
     return (
         <ThemeProvider theme={theme}>
@@ -138,66 +182,72 @@ const MyApp = ({
             </Snackbar>
             {!useMegatreopuz ? (
                 <Component
-                    setEnvironment={setEnv}
+                    showError={showError}
                     {...pageProps}
                     {...{ loading, setLoading, pathLoading: routeChange }}
                 />
-            ) : environment ? (
-                <QueryRenderer<AppViewerQuery>
-                    environment={environment}
-                    query={graphql`
-                        query AppViewerQuery {
-                            active: getState
-                            viewer {
-                                id
-                                userName
-                                name
-                                email
-                                phone
-                                college
-                                year
-                                lastAnsweredQuestionTime
-                                country
-                                admin
-                                lastAnsweredQuestion
-                                totalQuestionsAnswered
-                                rank
-                            }
-                        }
-                    `}
-                    variables={{}}
-                    render={({
-                        error,
-                        props
-                    }: {
-                        error: Error | null;
-                        props: AppViewerQuery["response"] | null;
-                    }) => {
-                        if (error) {
-                            showError(error);
-                            return null;
-                        } else if (props) {
-                            return (
-                                <Component
-                                    contestActive={props.active}
-                                    setEnvironment={setEnv}
-                                    viewer={props.viewer}
-                                    environment={environment}
-                                    showError={showError}
-                                    {...pageProps}
-                                    {...{
-                                        loading,
-                                        setLoading,
-                                        pathLoading: routeChange
-                                    }}
-                                />
-                            );
-                        }
-                        return <LoadingScreen loading={true} />;
-                    }}
-                />
             ) : (
-                <Dummy />
+                environment && (
+                    <QueryRenderer<AppViewerQuery>
+                        environment={environment}
+                        query={graphql`
+                            query AppViewerQuery {
+                                active: getState
+                                viewer {
+                                    id
+                                    userName
+                                    name
+                                    email
+                                    phone
+                                    college
+                                    year
+                                    lastAnsweredQuestionTime
+                                    country
+                                    admin
+                                    lastAnsweredQuestion
+                                    totalQuestionsAnswered
+                                    rank
+                                }
+                            }
+                        `}
+                        variables={{}}
+                        render={({
+                            error,
+                            props
+                        }: {
+                            error: Error | null;
+                            props: AppViewerQuery["response"] | null;
+                        }) => {
+                            if (error) {
+                                showError(error);
+                                return null;
+                            } else if (props) {
+                                return (
+                                    <>
+                                        <Menu
+                                            logout={logout}
+                                            viewer={props.viewer}
+                                        />
+                                        <Component
+                                            logout={logout}
+                                            contestActive={props.active}
+                                            viewer={props.viewer}
+                                            environment={environment}
+                                            showError={showError}
+                                            {...pageProps}
+                                            {...{
+                                                loading,
+                                                setLoading,
+                                                pathLoading: routeChange
+                                            }}
+                                        />
+                                    </>
+                                );
+                            }
+                            return <LoadingScreen loading={true} />;
+                        }}
+                    />
+                )
             )}
         </ThemeProvider>
     );

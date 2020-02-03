@@ -66,26 +66,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 const CreateUser: NextPage<PageProps> = ({
     showError,
     loading,
-    setLoading,
-    setEnvironment
+    setLoading
 }) => {
     const router = useRouter();
     const classes = useStyles();
 
     useEffect(() => {
         const token = cookie.get("access_token");
-        const expiresAt = cookie.get("expires_at");
-        const exists = cookie.get("user_exists");
-        if (!token || !expiresAt) {
+        const expiresAt = parseInt(cookie.get("expires_at") || "0");
+        if (!token || !expiresAt || Date.now() > expiresAt) {
             showError(new Error("Please sign in using google"));
             router.push("/megatreopuz/signIn");
-        } else if (exists === "true") {
-            if (setEnvironment) {
-                setEnvironment(makeEnvironment());
-            }
-            setTimeout(() => {
-                router.replace("/megatreopuz/dashboard");
-            });
         }
     }, []);
 
@@ -103,8 +94,10 @@ const CreateUser: NextPage<PageProps> = ({
                             setLoading(true);
                             const token = cookie.get("access_token");
                             if (!token) {
-                                console.error(
-                                    "Invalid token. Please sign in using google"
+                                showError(
+                                    new Error(
+                                        "Invalid token. Please sign in using google"
+                                    )
                                 );
                                 setLoading(false);
                                 return;
@@ -128,20 +121,6 @@ const CreateUser: NextPage<PageProps> = ({
                                     setSubmitting(false);
 
                                     if (response.status === 201) {
-                                        cookie.set(
-                                            "user_exists",
-                                            Boolean(true).toString(),
-                                            {
-                                                expires: new Date(
-                                                    Number.parseInt(
-                                                        cookie.get(
-                                                            "expires_at"
-                                                        ) || "0"
-                                                    )
-                                                ),
-                                                sameSite: "strict"
-                                            }
-                                        );
                                         setLoading(false);
                                         router.replace(
                                             "/megatreopuz/dashboard"

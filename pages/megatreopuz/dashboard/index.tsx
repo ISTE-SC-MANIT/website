@@ -56,7 +56,6 @@ const Dashboard: NextPage<Props> = ({ showError, viewer }) => {
     const router = useRouter();
     return (
         <NoSsr>
-            <Menu viewer={viewer} active="Dashboard" />
             <Container maxWidth="md" className={classes.container}>
                 <Grid container spacing={3} justify="center">
                     <Grid item xs={10} sm={6} md={4}>
