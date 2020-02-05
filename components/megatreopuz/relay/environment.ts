@@ -11,8 +11,7 @@ export const makeEnvironment = () => {
     const token = cookie.get("access_token");
     const network = new RelayNetworkLayer([
         urlMiddleware({
-            url: () =>
-                Promise.resolve(`${process.env.MEGATREOPUZ_SERVER}/graphql`)
+            url: () => Promise.resolve(`http://139.59.16.163:8000/graphql`)
         }),
         authMiddleware({
             token: token,

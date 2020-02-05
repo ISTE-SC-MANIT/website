@@ -32,9 +32,9 @@ const ThankYou: React.FunctionComponent = () => {
                 container
                 item
             >
-                <DoneIcon className={classes.icon} />
+                {/* <img src="/p.jpeg"></img> */}
                 <Typography align="center" variant="h4" component="h1">
-                    You have registered successfully
+                    Contest will go live on 09.02.2020 at 06:00 PM
                 </Typography>
             </Grid>
         </section>
