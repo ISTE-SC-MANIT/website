@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import clsx from "clsx";
-import ReactNode from "react";
 import {
     makeStyles,
     useTheme,
@@ -90,7 +89,6 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     })
 );
-let Title: React.ReactNode;
 let Icon1: React.ReactNode;
 let Icon2: React.ReactNode;
 let Icon3: React.ReactNode;
@@ -114,14 +112,11 @@ export default function PersistentDrawerLeft() {
     React.useEffect(() => {
         switch (first) {
             case "":
-                Title = "ISTE SC MANIT ";
                 Icon1 = "Events";
                 Icon2 = "Team";
                 Icon3 = "Gallery";
                 break;
             case "chimera": {
-                Title = "Chimera";
-
                 Icon1 = "Prizes";
                 Icon2 = "Why ?";
                 Icon3 = "FAQs";

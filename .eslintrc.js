@@ -1,7 +1,7 @@
 module.exports = {
     root: true,
     parser: "@typescript-eslint/parser",
-    plugins: ["@typescript-eslint"],
+    plugins: ["@typescript-eslint", "react-hooks"],
     extends: [
         "eslint:recommended",
         "plugin:react/recommended",
@@ -40,10 +40,14 @@ module.exports = {
         ]
     },
     rules: {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
         "@typescript-eslint/explicit-function-return-type": 0,
         "@typescript-eslint/no-explicit-any": 0,
         "react/prop-types": 0,
         "react/no-unescaped-entities": 0,
-        "@typescript-eslint/no-empty-function": 0
+        "@typescript-eslint/no-empty-function": 0,
+        "@typescript-eslint/camelcase": 0,
+        "@typescript-eslint/no-non-null-assertion": 0
     }
 };

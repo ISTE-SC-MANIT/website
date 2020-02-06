@@ -1,4 +1,7 @@
-import { UserInput } from "./../__generated__/updateUserMutation.graphql";
+import {
+    UserInput,
+    updateUserMutationResponse
+} from "./../__generated__/updateUserMutation.graphql";
 import { Environment, RecordSourceSelectorProxy } from "relay-runtime";
 import { graphql, commitMutation } from "react-relay";
 
@@ -16,7 +19,7 @@ const mutation = graphql`
 
 interface Callbacks {
     onError(err: Error): void;
-    onCompleted(...args: any): void;
+    onCompleted(response: updateUserMutationResponse): void;
 }
 
 const updater = (
@@ -52,7 +55,10 @@ export const commit = (
         variables: {
             user: userInfo
         },
-        onCompleted,
+        onCompleted: (response, error) => {
+            if (error) return;
+            onCompleted(response as updateUserMutationResponse);
+        },
         onError,
         updater: (store: RecordSourceSelectorProxy) => {
             updater(store, userInfo, userId);

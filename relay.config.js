@@ -4,5 +4,8 @@ module.exports = {
     exclude: ["**/node_modules/**"],
     extentions: ["ts", "tsx"],
     language: "typescript", 
-    "artifactDirectory":  "./components/megatreopuz/relay/__generated__"
+    artifactDirectory:  "./components/megatreopuz/relay/__generated__",
+    customScalars: {
+        Timestamp: "String"
+    }
 }

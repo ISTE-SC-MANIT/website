@@ -1,23 +1,7 @@
 import React from "react";
-import {
-    createMuiTheme,
-    ThemeProvider,
-    makeStyles
-} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import LinkedInIcon from "@material-ui/icons/LinkedIn";
-import InstagramIcon from "@material-ui/icons/Instagram";
-import YouTubeIcon from "@material-ui/icons/YouTube";
 import {
     List,
     ListItem,

@@ -1,5 +1,6 @@
 import { Environment } from "relay-runtime";
 import { graphql, commitMutation } from "react-relay";
+import { deleteUserMutationResponse } from "../__generated__/deleteUserMutation.graphql";
 
 const mutation = graphql`
     mutation deleteUserMutation {
@@ -11,7 +12,7 @@ const mutation = graphql`
 
 interface Callbacks {
     onError(err: Error): void;
-    onCompleted(...args: any): void;
+    onCompleted(response: deleteUserMutationResponse): void;
 }
 
 export const commit = (
@@ -22,5 +23,8 @@ export const commit = (
         mutation,
         variables: {},
         onError,
-        onCompleted
+        onCompleted: (response, error) => {
+            if (error) return;
+            onCompleted(response as deleteUserMutationResponse);
+        }
     });

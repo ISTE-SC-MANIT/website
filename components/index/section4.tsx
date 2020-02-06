@@ -1,22 +1,11 @@
 import React from "react";
-import {
-    createMuiTheme,
-    ThemeProvider,
-    makeStyles
-} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-
 import Divider from "@material-ui/core/Divider";
-
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import LinkedInIcon from "@material-ui/icons/LinkedIn";
-import InstagramIcon from "@material-ui/icons/Instagram";
-import YouTubeIcon from "@material-ui/icons/YouTube";
-import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import { List, ListItem, ListItemText } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     root: {

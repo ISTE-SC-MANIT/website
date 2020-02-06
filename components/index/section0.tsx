@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import clsx from "clsx";
-import ReactNode from "react";
 import {
     makeStyles,
     useTheme,
@@ -26,7 +25,6 @@ import HomeIcon from "@material-ui/icons/Home";
 import InfoIcon from "@material-ui/icons/Info";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import GroupIcon from "@material-ui/icons/Group";
 import ImageIcon from "@material-ui/icons/Image";
 import Avatar from "@material-ui/core/Avatar";
@@ -90,10 +88,6 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     })
 );
-let Title: React.ReactNode;
-let Icon1: React.ReactNode;
-let Icon2: React.ReactNode;
-let Icon3: React.ReactNode;
 export default function PersistentDrawerLeft() {
     const classes = useStyles();
     const theme = useTheme();

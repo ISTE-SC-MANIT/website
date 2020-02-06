@@ -1,7 +1,13 @@
 # source: http://localhost:8080/graphql
-# timestamp: Mon Feb 03 2020 14:01:25 GMT+0530 (India Standard Time)
+# timestamp: Fri Feb 07 2020 02:09:54 GMT+0530 (India Standard Time)
 
-type ContestState {
+type AnswerResponse implements Node {
+  id: String!
+  valid: Boolean!
+}
+
+type ContestState implements Node {
+  id: String!
   active: Boolean!
 }
 
@@ -11,17 +17,21 @@ type Mutation {
   createQuestion(question: QuestionInput!): Question
   updateQuestion(question: QuestionInput!): Question
   deleteQuestion(input: QuestionNumberInput!): Question
-  answerQuestion(answer: String!): Boolean
-  updateState(state: Boolean!): Boolean!
+  answerQuestion(answer: String!): AnswerResponse
+  updateState(state: Boolean!): ContestState!
+}
+
+interface Node {
+  id: String!
 }
 
 type Query {
   viewer: User!
   nextQuestion: Question
-  getState: Boolean!
+  getState: ContestState!
 }
 
-type Question {
+type Question implements Node {
   id: String!
   questionNo: Int!
   description: String!
@@ -39,8 +49,13 @@ input QuestionNumberInput {
   questionNo: Int!
 }
 
+type Rank implements Node {
+  id: String!
+  rank: Float!
+}
+
 type Subscription {
-  stateValue: Boolean!
+  stateValue: ContestState!
   rank: Int!
 }
 
@@ -49,7 +64,7 @@ The javascript `Date` as integer. Type represents date and time as number of mil
 """
 scalar Timestamp
 
-type User {
+type User implements Node {
   id: String!
   userName: String!
   name: String!
@@ -62,7 +77,7 @@ type User {
   admin: Boolean!
   lastAnsweredQuestion: Float!
   totalQuestionsAnswered: Float!
-  rank: Int
+  rank: Rank
 }
 
 input UserInput {

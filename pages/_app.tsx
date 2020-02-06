@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import {
     ThemeProvider,
@@ -20,6 +20,8 @@ import Menu from "../components/megatreopuz/menu";
 import { removeCookies } from "../components/megatreopuz/util";
 import cookie from "js-cookie";
 import { makeEnvironment } from "../components/megatreopuz/relay/environment";
+import { requestStateSubscription } from "../components/megatreopuz/relay/subscriptions/contestState";
+
 const useStyles = makeStyles((theme: Theme) => ({
     linearLoading: {
         position: "fixed",
@@ -35,6 +37,25 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
 }));
 
+interface SubProps {
+    environment: Environment;
+    stateId: string;
+    showError: (e: Error) => void;
+}
+const SubscriptionWrapper: React.FunctionComponent<SubProps> = ({
+    environment,
+    stateId,
+    showError
+}) => {
+    React.useEffect(() => {
+        requestStateSubscription(environment, stateId, {
+            onCompleted: () => {},
+            onError: showError
+        });
+    }, [environment, showError, stateId]);
+    return null;
+};
+
 export interface PageProps {
     loading: boolean;
     showError: (e: Error) => void;
@@ -44,9 +65,9 @@ export interface PageProps {
 
 export interface MegatreopuzPageProps extends PageProps {
     environment: Environment | null;
-    contestActive: boolean;
     logout: () => void;
     viewer: AppViewerQueryResponse["viewer"];
+    state: AppViewerQueryResponse["getState"];
 }
 
 const MyApp = ({
@@ -110,21 +131,21 @@ const MyApp = ({
     };
 
     /* Relay and Graphql */
-    const [useMegatreopuz, setMegatreopuz] = React.useState<boolean>(false);
     const TimeOut = React.useRef<any>();
 
-    let environment: Environment | null = React.useMemo(
-        () => makeEnvironment(),
-        [first, second]
-    );
+    const environment: Environment | null = React.useMemo(() => {
+        if (first === "megatreopuz" && second === "dashboard")
+            return makeEnvironment();
+        return null;
+    }, [first, second]);
+
     /* Logging user out of megatreopuz */
     const logout = React.useMemo(() => {
         return () => {
             removeCookies();
-            environment = null;
             router.push("/megatreopuz/signIn");
         };
-    }, []);
+    }, [router]);
 
     React.useEffect(() => {
         if (first === "megatreopuz" && second === "dashboard") {
@@ -145,17 +166,18 @@ const MyApp = ({
                 showError(
                     new Error("Google Login has timed out. Please log in again")
                 );
-                console.log("Logging out because expired");
                 logout();
             }, timeToExpire);
-            setMegatreopuz(true);
         } else {
-            setMegatreopuz(false);
             if (TimeOut.current) {
                 /* Cancel the previous timeout */
                 clearTimeout(TimeOut.current as number);
             }
         }
+    }, [first, logout, router, second]);
+
+    const useMegatreopuz = React.useMemo(() => {
+        return first === "megatreopuz" && second === "dashboard";
     }, [first, second]);
 
     return (
@@ -192,7 +214,10 @@ const MyApp = ({
                         environment={environment}
                         query={graphql`
                             query AppViewerQuery {
-                                active: getState
+                                getState {
+                                    id
+                                    active
+                                }
                                 viewer {
                                     id
                                     userName
@@ -201,12 +226,13 @@ const MyApp = ({
                                     phone
                                     college
                                     year
-                                    lastAnsweredQuestionTime
                                     country
                                     admin
-                                    lastAnsweredQuestion
                                     totalQuestionsAnswered
-                                    rank
+                                    rank {
+                                        id
+                                        rank
+                                    }
                                 }
                             }
                         `}
@@ -228,9 +254,14 @@ const MyApp = ({
                                             logout={logout}
                                             viewer={props.viewer}
                                         />
+                                        <SubscriptionWrapper
+                                            environment={environment!}
+                                            stateId={props.getState.id}
+                                            showError={showError}
+                                        />
                                         <Component
+                                            state={props.getState}
                                             logout={logout}
-                                            contestActive={props.active}
                                             viewer={props.viewer}
                                             environment={environment}
                                             showError={showError}

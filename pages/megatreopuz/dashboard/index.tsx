@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import React, { useEffect } from "react";
+import React from "react";
 import { AppViewerQueryResponse } from "../../../components/megatreopuz/relay/__generated__/AppViewerQuery.graphql";
 import {
     NoSsr,
@@ -11,7 +11,6 @@ import {
     Typography,
     Divider
 } from "@material-ui/core";
-import Menu from "../../../components/megatreopuz/menu";
 import InfoIcon from "@material-ui/icons/InfoOutlined";
 import HelpIcon from "@material-ui/icons/HelpOutline";
 import GamepadIcon from "@material-ui/icons/GamepadOutlined";
@@ -19,7 +18,6 @@ import RankIcon from "@material-ui/icons/SupervisorAccount";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 import { PageProps } from "../../_app";
-import cookie from "js-cookie";
 
 const useStyles = makeStyles((theme: Theme) => ({
     icon: {
@@ -50,10 +48,10 @@ interface Props extends PageProps {
     viewer: AppViewerQueryResponse["viewer"];
 }
 
-const Dashboard: NextPage<Props> = ({ showError, viewer }) => {
-    if (!viewer) return null;
+const Dashboard: NextPage<Props> = ({ viewer }) => {
     const classes = useStyles();
     const router = useRouter();
+    if (!viewer) return null;
     return (
         <NoSsr>
             <Container maxWidth="md" className={classes.container}>
@@ -87,7 +85,9 @@ const Dashboard: NextPage<Props> = ({ showError, viewer }) => {
                     <Grid item xs={10} sm={6} md={4}>
                         <Paper
                             className={clsx(classes.paper, classes.paperButton)}
-                            onClick={() => router.push("/megatreopuz/thanks")}
+                            onClick={() =>
+                                router.push("/megatreopuz/dashboard/contest")
+                            }
                         >
                             <GamepadIcon
                                 className={classes.icon}
@@ -135,7 +135,7 @@ const Dashboard: NextPage<Props> = ({ showError, viewer }) => {
                                 component="p"
                                 color="textSecondary"
                             >
-                                {viewer.rank || "Nil"}
+                                {viewer.rank ? viewer.rank.rank : "Nil"}
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
                                 Rank

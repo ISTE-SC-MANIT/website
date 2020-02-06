@@ -21,24 +21,15 @@ import {
     DialogContentText,
     DialogActions
 } from "@material-ui/core";
-import Menu from "../../../components/megatreopuz/menu";
 import { Formik } from "formik";
 import * as yup from "yup";
 import TextField from "../../../components/megatreopuz/customTextField";
 import { commit } from "../../../components/megatreopuz/relay/mutations/updateUser";
 import { commit as deleteUser } from "../../../components/megatreopuz/relay/mutations/deleteUser";
-import { Environment } from "react-relay";
 import DeleteIcon from "@material-ui/icons/Delete";
 import clsx from "clsx";
-import { removeCookies } from "../../../components/megatreopuz/util";
-import { useRouter } from "next/router";
 import { MegatreopuzPageProps } from "../../_app";
-interface Props {
-    loading: boolean;
-    setLoading: (b: boolean) => void;
-    viewer: AppViewerQueryResponse["viewer"];
-    environment: Environment;
-}
+
 
 const useStyles = makeStyles((theme: Theme) => ({
     icon: {
@@ -147,13 +138,14 @@ const Dashboard: NextPage<MegatreopuzPageProps> = ({
     setLoading,
     logout
 }) => {
-    if (!viewer) return null;
     const classes = useStyles();
     const [edit, setEdit] = React.useState<boolean>(false);
     const initialValues = React.useMemo(() => getInitialValues(viewer), [
         viewer
     ]);
     const [deleteDialog, setDelete] = React.useState<boolean>(false);
+        if (!viewer) return null;
+
     return (
         <NoSsr>
             <Box mt={2}>

@@ -11,14 +11,21 @@ module.exports = {
         ]
     ],
     plugins: [
-        // TODO: Set up transform
-        // ["transform-imports",
-        // {
-        //     "@material-ui\/(core|icons|styles)": {
-        //         transform: "@material-ui/${1}/${member}",
-        //         preventFullImport: false
-        //     }
-        // }],
+        ['transform-import', {
+          'libraryName': '@material-ui/core',
+          'libraryDirectory': '',
+          'camel2DashComponentName': false
+      }, '@material-ui/core'],
+      ['transform-import', {
+          'libraryName': '@material-ui/styles',
+          'libraryDirectory': '',
+          'camel2DashComponentName': false
+      }, '@material-ui/styles'],
+      ['transform-import', {
+          'libraryName': '@material-ui/icons',
+          'libraryDirectory': '',
+          'camel2DashComponentName': false
+      }, '@material-ui/icons'],
     ["relay", {
         "artifactDirectory": "./components/megatreopuz/relay/__generated__"
     }],

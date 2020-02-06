@@ -17,7 +17,6 @@ import {
 import { useRouter } from "next/router";
 import cookie from "js-cookie";
 import { PageProps } from "../_app";
-import { makeEnvironment } from "../../components/megatreopuz/relay/environment";
 
 const initialValues = {
     username: "",
@@ -94,7 +93,7 @@ const CreateUser: NextPage<PageProps> = ({
             showError(new Error("Please sign in using google"));
             router.push("/megatreopuz/signIn");
         }
-    }, []);
+    }, [router, showError]);
 
     return (
         <section className={classes.container}>

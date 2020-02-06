@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import {
     AppBar,
@@ -20,12 +20,14 @@ import MenuIcon from "@material-ui/icons/Menu";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import { useRouter } from "next/router";
 import FaceIcon from "@material-ui/icons/Face";
-import { GoogleLogout } from "react-google-login";
-import { removeCookies } from "./util";
+import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
 
 const useStyles = makeStyles((theme: Theme) => ({
     avatar: {
         background: theme.palette.secondary.main
+    },
+    rankButton: {
+        color: theme.palette.common.white
     },
     list: {
         width: "20vw",
@@ -53,6 +55,11 @@ const Config = [
         title: "User Info",
         icon: <FaceIcon />,
         path: "/megatreopuz/dashboard/userInfo"
+    },
+    {
+        title: "Contest",
+        icon: <SportsEsportsIcon />,
+        path: "/megatreopuz/dashboard/contest"
     }
 ];
 
