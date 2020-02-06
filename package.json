@@ -10,7 +10,8 @@
         "dev": "next dev",
         "build": "npm run relay && npx next build",
         "start": "next start",
-        "commit": "npx git-cz"
+        "commit": "npx git-cz",
+        "export": "npm run build && next export"
     },
     "dependencies": {
         "@babel/plugin-transform-runtime": "^7.7.6",

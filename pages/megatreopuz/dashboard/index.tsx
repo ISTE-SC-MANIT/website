@@ -71,7 +71,7 @@ const Dashboard: NextPage<Props> = ({ showError, viewer }) => {
                             </Typography>
                         </Paper>
                     </Grid>
-                    {/* <Grid item xs={10} sm={6} md={4}>
+                    <Grid item xs={10} sm={6} md={4}>
                         <Paper
                             onClick={() =>
                                 router.push("/megatreopuz/dashboard/help")
@@ -87,6 +87,7 @@ const Dashboard: NextPage<Props> = ({ showError, viewer }) => {
                     <Grid item xs={10} sm={6} md={4}>
                         <Paper
                             className={clsx(classes.paper, classes.paperButton)}
+                            onClick={() => router.push("/megatreopuz/thanks")}
                         >
                             <GamepadIcon
                                 className={classes.icon}
@@ -100,13 +101,14 @@ const Dashboard: NextPage<Props> = ({ showError, viewer }) => {
                     <Grid item xs={10} sm={6} md={4}>
                         <Paper
                             className={clsx(classes.paper, classes.paperButton)}
+                            onClick={() => router.push("/megatreopuz/thanks1")}
                         >
                             <RankIcon className={classes.icon} color="action" />
                             <Typography variant="body2" color="textSecondary">
                                 Leaderboard
                             </Typography>
                         </Paper>
-                    </Grid> */}
+                    </Grid>
                 </Grid>
             </Container>
             <Divider className={classes.divider} />
