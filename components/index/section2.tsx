@@ -40,7 +40,13 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             abouthead: {
                 margin: "auto",
-                width: "180px"
+                padding: "10px"
+            },
+            paper1: {
+                height: "386px"
+            },
+            paper: {
+                marginTop: "0px"
             }
         }
     })

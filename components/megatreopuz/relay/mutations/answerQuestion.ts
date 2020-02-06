@@ -2,7 +2,7 @@ import { commitMutation, graphql } from "react-relay";
 import { Environment } from "relay-runtime";
 
 const mutation = graphql`
-    mutation answerQuestionMutation($input: string!) {
+    mutation answerQuestionMutation($input: String!) {
         answerQuestion(answer: $input)
     }
 `;
@@ -13,7 +13,7 @@ interface Callbacks {
 
 export const checkanswer = (
     environment: Environment,
-    answer: string,
+    answer: String,
 
     { onCompleted, onError }: Callbacks
 ) => {

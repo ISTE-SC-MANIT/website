@@ -14,6 +14,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import Link from "next/link";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -36,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     },
     card: {
         margin: "50px",
-        height: "500px"
+        height: "525px"
     },
     img: {
         // width:"40%",
@@ -111,13 +112,15 @@ export default function FontSizeTheme() {
                             </CardContent>
 
                             <CardActions>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.button}
-                                >
-                                    view website
-                                </Button>
+                                <Link href="/versionbeta">
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.button}
+                                    >
+                                        view website
+                                    </Button>
+                                </Link>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -154,13 +157,15 @@ export default function FontSizeTheme() {
                             </CardContent>
 
                             <CardActions>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.button}
-                                >
-                                    view website
-                                </Button>
+                                <Link href="/Chimera.html">
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.button}
+                                    >
+                                        view website
+                                    </Button>
+                                </Link>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -198,13 +203,15 @@ export default function FontSizeTheme() {
                             </CardContent>
 
                             <CardActions>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.button}
-                                >
-                                    view website
-                                </Button>
+                                <Link href="/codathon">
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.button}
+                                    >
+                                        view website
+                                    </Button>
+                                </Link>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -241,13 +248,15 @@ export default function FontSizeTheme() {
                             </CardContent>
 
                             <CardActions>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.button}
-                                >
-                                    view website
-                                </Button>
+                                <Link href="/megatreopuz/signIn.html">
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.button}
+                                    >
+                                        view website
+                                    </Button>
+                                </Link>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -256,7 +265,7 @@ export default function FontSizeTheme() {
                             <CardActionArea>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/index/Anubhuti.jpg"
+                                    image="/index/anubhuti.jpg"
                                     title="Contemplative Reptile"
                                 />
                             </CardActionArea>

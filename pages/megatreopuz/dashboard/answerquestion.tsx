@@ -99,56 +99,6 @@ const schema = yup.object({
     answer: yup.string().required("Required")
 });
 
-// interface DialogProps {
-//     open: boolean;
-//     deleteUser: () => void;
-//     onClose: () => void;
-// }
-
-// const DeleteDialog: React.FunctionComponent<DialogProps> = ({
-//     open,
-//     deleteUser,
-//     onClose
-// }) => {
-//     return (
-//         <Dialog
-//             open={open}
-//             onClose={onClose}
-//             aria-labelledby="delete-dialog-title"
-//             aria-describedby="delete-dialog-description"
-//         >
-//             <DialogTitle id="Delete-dialog-title">
-//                 Delete Account Permanently?
-//             </DialogTitle>
-//             <DialogContent>
-//                 <DialogContentText id="delete-dialog-description">
-//                     This is a non reversible action. All your data and progress
-//                     will be deleted. Proceed if that is what you want.
-//                 </DialogContentText>
-//             </DialogContent>
-//             <DialogActions>
-//                 <Button
-//                     onClick={() => {
-//                         deleteUser();
-//                         onClose();
-//                     }}
-//                     color="primary"
-//                     variant="contained"
-//                 >
-//                     Delete
-//                 </Button>
-//                 <Button
-//                     onClick={onClose}
-//                     color="primary"
-//                     variant="outlined"
-//                     autoFocus
-//                 >
-//                     Cancel
-//                 </Button>
-//             </DialogActions>
-//         </Dialog>
-//     );
-// };
 
 const Dashboard: NextPage<MegatreopuzPageProps> = ({
     viewer,
@@ -201,7 +151,7 @@ const Dashboard: NextPage<MegatreopuzPageProps> = ({
                         <Grid container alignItems="center" justify="center">
                             <Grid item xs={10} sm={6} md={4} lg={7}>
                                 <Paper
-                                    // onClick={() => setDelete(true)}
+                                    
                                     className={clsx(
                                         classes.paper,
                                         classes.paperButton

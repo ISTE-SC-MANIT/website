@@ -1,13 +1,6 @@
 import React from "react";
-import {
-    Container,
-    Theme,
-    Typography,
-    Grid,
-    Paper,
-    useMediaQuery
-} from "@material-ui/core";
-
+import { Container, Theme, Typography, Grid, Paper } from "@material-ui/core";
+import { useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -21,8 +14,11 @@ const useStyles = makeStyles((theme: Theme) => {
         },
         heading: {
             color: "white",
-            marginLeft: "250px",
-            marginTop: "230px"
+            marginLeft: "550px",
+            marginTop: "230px",
+            textAlign: "center",
+            position: "relative",
+            top: "-90px"
         },
 
         image1: {
@@ -44,6 +40,13 @@ const useStyles = makeStyles((theme: Theme) => {
             top: "-400px",
             left: "100px"
         },
+        image4: {
+            width: "100px",
+            marginLeft: "-10px",
+            position: "relative",
+            top: "230px",
+            left: "-120px"
+        },
         imgcontainer: {
             marginTop: "300px",
             background: "transparent",
@@ -56,7 +59,10 @@ const useStyles = makeStyles((theme: Theme) => {
         },
         heading1: {
             color: "white",
-            marginLeft: "250px"
+            marginLeft: "550px",
+            textAlign: "center",
+            position: "relative",
+            top: "-60px"
         },
         [theme.breakpoints.down("sm")]: {
             grid2: {
@@ -70,11 +76,17 @@ const useStyles = makeStyles((theme: Theme) => {
             heading: {
                 marginLeft: "400px",
                 padding: "10px",
+
                 marginTop: "20px"
             },
             heading1: {
                 marginLeft: "400px",
                 padding: "5px"
+            },
+
+            image4: {
+                marginLeft: "630px",
+                top: "-120px"
             }
         }
     };
@@ -87,19 +99,22 @@ const Section1: React.FC = () => {
         <div className={classes.root} id="Home">
             <Grid container spacing={0}>
                 <Grid item xs={12} sm={6} lg={8} className={classes.grid1}>
-                    <Typography
-                        variant="h3"
-                        component="h2"
-                        className={classes.heading}
-                    >
-                        ISTE SC MANIT
-                    </Typography>
+                    <div>
+                        <img src="/logo1.png" className={classes.image4}></img>
+                        <Typography
+                            variant="h3"
+                            component="h2"
+                            className={classes.heading}
+                        >
+                            ISTE MANIT STUDENTS CHAPTER MANIT
+                        </Typography>
+                    </div>
                     <Typography
                         variant="subtitle1"
                         className={classes.heading1}
                     >
-                        The best Students,s Chapter from last 3 years in MP-CG
-                        region
+                        The Best student chapter in Madhya Pradesh and<br></br>
+                        Chattisgarh Region from Last consecutive Three years.
                     </Typography>
                 </Grid>
                 <Grid item xs={12} sm={6} lg={4} className={classes.grid2}>
