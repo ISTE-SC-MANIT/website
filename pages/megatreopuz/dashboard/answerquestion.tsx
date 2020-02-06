@@ -99,7 +99,6 @@ const schema = yup.object({
     answer: yup.string().required("Required")
 });
 
-
 const Dashboard: NextPage<MegatreopuzPageProps> = ({
     viewer,
     environment,
@@ -151,7 +150,6 @@ const Dashboard: NextPage<MegatreopuzPageProps> = ({
                         <Grid container alignItems="center" justify="center">
                             <Grid item xs={10} sm={6} md={4} lg={7}>
                                 <Paper
-                                    
                                     className={clsx(
                                         classes.paper,
                                         classes.paperButton

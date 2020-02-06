@@ -108,7 +108,7 @@ const CreateUser: NextPage<PageProps> = ({
                     <Grid item xs className={classes.image1}>
                         <div className="leftside">
                             <img
-                                src="/poster2.png"
+                                src="/poster.jpg"
                                 className={classes.image}
                             ></img>
                         </div>
