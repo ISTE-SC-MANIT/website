@@ -30,7 +30,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import clsx from "clsx";
 import { MegatreopuzPageProps } from "../../_app";
 
-
 const useStyles = makeStyles((theme: Theme) => ({
     icon: {
         fontSize: "4rem"
@@ -144,7 +143,7 @@ const Dashboard: NextPage<MegatreopuzPageProps> = ({
         viewer
     ]);
     const [deleteDialog, setDelete] = React.useState<boolean>(false);
-        if (!viewer) return null;
+    if (!viewer) return null;
 
     return (
         <NoSsr>

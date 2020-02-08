@@ -1,9 +1,5 @@
 import React from "react";
-import {
-    Theme,
-    Typography,
-    Grid,
-} from "@material-ui/core";
+import { Theme, Typography, Grid } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 

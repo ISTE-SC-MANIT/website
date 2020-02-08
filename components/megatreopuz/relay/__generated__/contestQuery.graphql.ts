@@ -15,8 +15,6 @@ export type contestQuery = {
     readonly variables: contestQueryVariables;
 };
 
-
-
 /*
 query contestQuery {
   nextQuestion {
@@ -33,85 +31,86 @@ fragment contest_question on Question {
 */
 
 const node: ConcreteRequest = {
-  "kind": "Request",
-  "fragment": {
-    "kind": "Fragment",
-    "name": "contestQuery",
-    "type": "Query",
-    "metadata": null,
-    "argumentDefinitions": [],
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "nextQuestion",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Question",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "FragmentSpread",
-            "name": "contest_question",
-            "args": null
-          }
+    kind: "Request",
+    fragment: {
+        kind: "Fragment",
+        name: "contestQuery",
+        type: "Query",
+        metadata: null,
+        argumentDefinitions: [],
+        selections: [
+            {
+                kind: "LinkedField",
+                alias: null,
+                name: "nextQuestion",
+                storageKey: null,
+                args: null,
+                concreteType: "Question",
+                plural: false,
+                selections: [
+                    {
+                        kind: "FragmentSpread",
+                        name: "contest_question",
+                        args: null
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "operation": {
-    "kind": "Operation",
-    "name": "contestQuery",
-    "argumentDefinitions": [],
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "nextQuestion",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "Question",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "questionNo",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "imgUrl",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "description",
-            "args": null,
-            "storageKey": null
-          }
+    },
+    operation: {
+        kind: "Operation",
+        name: "contestQuery",
+        argumentDefinitions: [],
+        selections: [
+            {
+                kind: "LinkedField",
+                alias: null,
+                name: "nextQuestion",
+                storageKey: null,
+                args: null,
+                concreteType: "Question",
+                plural: false,
+                selections: [
+                    {
+                        kind: "ScalarField",
+                        alias: null,
+                        name: "id",
+                        args: null,
+                        storageKey: null
+                    },
+                    {
+                        kind: "ScalarField",
+                        alias: null,
+                        name: "questionNo",
+                        args: null,
+                        storageKey: null
+                    },
+                    {
+                        kind: "ScalarField",
+                        alias: null,
+                        name: "imgUrl",
+                        args: null,
+                        storageKey: null
+                    },
+                    {
+                        kind: "ScalarField",
+                        alias: null,
+                        name: "description",
+                        args: null,
+                        storageKey: null
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "params": {
-    "operationKind": "query",
-    "name": "contestQuery",
-    "id": null,
-    "text": "query contestQuery {\n  nextQuestion {\n    ...contest_question\n  }\n}\n\nfragment contest_question on Question {\n  id\n  questionNo\n  imgUrl\n  description\n}\n",
-    "metadata": {}
-  }
+    },
+    params: {
+        operationKind: "query",
+        name: "contestQuery",
+        id: null,
+        text:
+            "query contestQuery {\n  nextQuestion {\n    ...contest_question\n  }\n}\n\nfragment contest_question on Question {\n  id\n  questionNo\n  imgUrl\n  description\n}\n",
+        metadata: {}
+    }
 };
-(node as any).hash = '0c86372ed1ca60351ca4340d87bd4343';
+(node as any).hash = "0c86372ed1ca60351ca4340d87bd4343";
 export default node;

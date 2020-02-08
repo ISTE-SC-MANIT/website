@@ -17,8 +17,6 @@ export type answerQuestionMutation = {
     readonly variables: answerQuestionMutationVariables;
 };
 
-
-
 /*
 mutation answerQuestionMutation(
   $input: String!
@@ -30,72 +28,73 @@ mutation answerQuestionMutation(
 }
 */
 
-const node: ConcreteRequest = (function(){
-var v0 = [
-  {
-    "kind": "LocalArgument",
-    "name": "input",
-    "type": "String!",
-    "defaultValue": null
-  }
-],
-v1 = [
-  {
-    "kind": "LinkedField",
-    "alias": null,
-    "name": "answerQuestion",
-    "storageKey": null,
-    "args": [
-      {
-        "kind": "Variable",
-        "name": "answer",
-        "variableName": "input"
-      }
-    ],
-    "concreteType": "AnswerResponse",
-    "plural": false,
-    "selections": [
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "id",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "valid",
-        "args": null,
-        "storageKey": null
-      }
-    ]
-  }
-];
-return {
-  "kind": "Request",
-  "fragment": {
-    "kind": "Fragment",
-    "name": "answerQuestionMutation",
-    "type": "Mutation",
-    "metadata": null,
-    "argumentDefinitions": (v0/*: any*/),
-    "selections": (v1/*: any*/)
-  },
-  "operation": {
-    "kind": "Operation",
-    "name": "answerQuestionMutation",
-    "argumentDefinitions": (v0/*: any*/),
-    "selections": (v1/*: any*/)
-  },
-  "params": {
-    "operationKind": "mutation",
-    "name": "answerQuestionMutation",
-    "id": null,
-    "text": "mutation answerQuestionMutation(\n  $input: String!\n) {\n  answerQuestion(answer: $input) {\n    id\n    valid\n  }\n}\n",
-    "metadata": {}
-  }
-};
+const node: ConcreteRequest = (function() {
+    var v0 = [
+            {
+                kind: "LocalArgument",
+                name: "input",
+                type: "String!",
+                defaultValue: null
+            }
+        ],
+        v1 = [
+            {
+                kind: "LinkedField",
+                alias: null,
+                name: "answerQuestion",
+                storageKey: null,
+                args: [
+                    {
+                        kind: "Variable",
+                        name: "answer",
+                        variableName: "input"
+                    }
+                ],
+                concreteType: "AnswerResponse",
+                plural: false,
+                selections: [
+                    {
+                        kind: "ScalarField",
+                        alias: null,
+                        name: "id",
+                        args: null,
+                        storageKey: null
+                    },
+                    {
+                        kind: "ScalarField",
+                        alias: null,
+                        name: "valid",
+                        args: null,
+                        storageKey: null
+                    }
+                ]
+            }
+        ];
+    return {
+        kind: "Request",
+        fragment: {
+            kind: "Fragment",
+            name: "answerQuestionMutation",
+            type: "Mutation",
+            metadata: null,
+            argumentDefinitions: v0 /*: any*/,
+            selections: v1 /*: any*/
+        },
+        operation: {
+            kind: "Operation",
+            name: "answerQuestionMutation",
+            argumentDefinitions: v0 /*: any*/,
+            selections: v1 /*: any*/
+        },
+        params: {
+            operationKind: "mutation",
+            name: "answerQuestionMutation",
+            id: null,
+            text:
+                "mutation answerQuestionMutation(\n  $input: String!\n) {\n  answerQuestion(answer: $input) {\n    id\n    valid\n  }\n}\n",
+            metadata: {}
+        }
+    };
 })();
-(node as any).hash = '712d3bb9040cb6c75d475b5ef3fa0621';
+(node as any).hash = "712d3bb9040cb6c75d475b5ef3fa0621";
 export default node;
