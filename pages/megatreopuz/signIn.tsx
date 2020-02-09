@@ -207,7 +207,7 @@ const LoginPage: NextPage<PageProps> = ({
                     <Grid container item alignItems="center" justify="center">
                         <GoogleLogin
                             disabled={loading || pathLoading}
-                            clientId={process.env.CLIENT_ID || ""}
+                            clientId={process.env.CLIENT_ID}
                             onSuccess={async (
                                 googleUser:
                                     | GoogleLoginResponseOffline

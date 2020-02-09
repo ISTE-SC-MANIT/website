@@ -101,7 +101,9 @@ const Dashboard: NextPage<Props> = ({ viewer }) => {
                     <Grid item xs={10} sm={6} md={4}>
                         <Paper
                             className={clsx(classes.paper, classes.paperButton)}
-                            onClick={() => router.push("/megatreopuz/thanks1")}
+                            onClick={() =>
+                                router.push("/megatreopuz/dashboard/leader")
+                            }
                         >
                             <RankIcon className={classes.icon} color="action" />
                             <Typography variant="body2" color="textSecondary">
