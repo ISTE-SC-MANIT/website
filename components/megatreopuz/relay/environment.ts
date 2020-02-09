@@ -29,7 +29,8 @@ export const makeEnvironment = () => {
     const network = new RelayNetworkLayer(
         [
             urlMiddleware({
-                url: () => Promise.resolve(`${process.env.MEGATREOPUZ_SERVER}/graphql`)
+                url: () =>
+                    Promise.resolve(`${process.env.MEGATREOPUZ_SERVER}/graphql`)
             }),
             authMiddleware({
                 token: token,
