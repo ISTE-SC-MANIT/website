@@ -1,5 +1,5 @@
 import React from "react";
-import { Theme, Box, Grid, Typography } from "@material-ui/core";
+import { Theme, Box, Grid, Typography, Link } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import DoneIcon from "@material-ui/icons/CheckCircleOutline";
 
@@ -55,6 +55,11 @@ const ThankYou: React.FunctionComponent = () => {
                     to disqualify any contestant if he/she indulges in any
                     unfair practice.<br></br> • To claim prizes, the winner
                     needs to have an Indian Bank Account.
+                </Typography>
+                <Typography variant="h6">
+                    <Link href="https://www.facebook.com/megatreopuz/">
+                        For Hints Refer https://www.facebook.com/megatreopuz/
+                    </Link>
                 </Typography>
             </Grid>
         </section>
