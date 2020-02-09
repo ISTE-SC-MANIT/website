@@ -16,42 +16,44 @@ export type contest_question$key = {
     readonly " $fragmentRefs": FragmentRefs<"contest_question">;
 };
 
+
+
 const node: ReaderFragment = {
-    kind: "Fragment",
-    name: "contest_question",
-    type: "Question",
-    metadata: null,
-    argumentDefinitions: [],
-    selections: [
-        {
-            kind: "ScalarField",
-            alias: null,
-            name: "id",
-            args: null,
-            storageKey: null
-        },
-        {
-            kind: "ScalarField",
-            alias: null,
-            name: "questionNo",
-            args: null,
-            storageKey: null
-        },
-        {
-            kind: "ScalarField",
-            alias: null,
-            name: "imgUrl",
-            args: null,
-            storageKey: null
-        },
-        {
-            kind: "ScalarField",
-            alias: null,
-            name: "description",
-            args: null,
-            storageKey: null
-        }
-    ]
+  "kind": "Fragment",
+  "name": "contest_question",
+  "type": "Question",
+  "metadata": null,
+  "argumentDefinitions": [],
+  "selections": [
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "id",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "questionNo",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "imgUrl",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "description",
+      "args": null,
+      "storageKey": null
+    }
+  ]
 };
-(node as any).hash = "6a59d018bcff038677b52ae9adfc96db";
+(node as any).hash = '6a59d018bcff038677b52ae9adfc96db';
 export default node;

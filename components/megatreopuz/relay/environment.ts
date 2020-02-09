@@ -15,7 +15,7 @@ export const makeEnvironment = () => {
     const subscribeFn: SubscribeFunction = (config, variables) => {
         const query = config.text!;
         const subscriptionClient = new SubscriptionClient(
-            `ws://139.59.16.163:8000/graphql`,
+            `${process.env.MEGATREOPUZ_SUBSCRIPTIONS}/graphql`,
             {
                 reconnect: true,
                 connectionParams: {
@@ -29,7 +29,7 @@ export const makeEnvironment = () => {
     const network = new RelayNetworkLayer(
         [
             urlMiddleware({
-                url: () => Promise.resolve(`http://139.59.16.163:8000/graphql`)
+                url: () => Promise.resolve(`${process.env.MEGATREOPUZ_SERVER}/graphql`)
             }),
             authMiddleware({
                 token: token,
