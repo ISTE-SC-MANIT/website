@@ -233,31 +233,6 @@ const MyApp = ({
                                         id
                                         rank
                                     }
-                                    leaderBoard {
-                                        edges {
-                                            node {
-                                                id
-                                                userName
-                                                name
-                                                email
-                                                phone
-                                                college
-                                                year
-                                                country
-                                                admin
-                                                totalQuestionsAnswered
-                                                rank {
-                                                    id
-                                                    rank
-                                                }
-                                                cursor
-                                            }
-                                            pageInfo {
-                                                endCursor
-                                                hasNextPage
-                                            }
-                                        }
-                                    }
                                 }
                             }
                         `}
