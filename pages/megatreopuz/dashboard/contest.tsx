@@ -12,7 +12,8 @@ import {
     Box,
     CircularProgress,
     Grid,
-    fade
+    fade,
+    Modal
 } from "@material-ui/core";
 import { NextPage } from "next";
 import { MegatreopuzPageProps } from "../../_app";
@@ -26,6 +27,7 @@ import { commit } from "../../../components/megatreopuz/relay/mutations/answerQu
 import LoadingScreen from "../../../components/loading";
 import { contestQuery } from "../../../components/megatreopuz/relay/__generated__/contestQuery.graphql";
 import { contest_question } from "../../../components/megatreopuz/relay/__generated__/contest_question.graphql";
+import clsx from "clsx";
 const useStyles = makeStyles(() => ({
     container: {
         position: "absolute",
@@ -84,6 +86,20 @@ const useQuestionStyles = makeStyles((theme: Theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
+    },
+    modal: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative"
+    },
+    modalImage: {
+        minWidth: "50vw",
+        [theme.breakpoints.down("sm")]: {
+            minWidth: "30vw",
+            maxWidth: 300
+        },
+        maxWidth: 600
     }
 }));
 
@@ -136,17 +152,27 @@ const Question: React.FunctionComponent<QuestionProps> = ({
         setAnswer("");
     }, [question.id, setMainLoading]);
 
+    const [modal, setModal] = useState<boolean>(false);
+
     return (
         <Container maxWidth="sm">
             <Card elevation={5}>
                 <CardHeader
                     title={question.description}
+                    subheader={"Click on the image to enlarge it"}
                     titleTypographyProps={{
                         align: "center",
                         variant: "h5",
                         component: "h2"
                     }}
                 />
+                <Modal
+                    open={modal}
+                    onClose={() => setModal(false)}
+                    className={classes.modal}
+                >
+                    <img className={classes.modalImage} src={img}></img>
+                </Modal>
                 <CardContent>
                     <figure className={classes.figure}>
                         {loading && (
@@ -157,6 +183,7 @@ const Question: React.FunctionComponent<QuestionProps> = ({
                         <img
                             className={classes.image}
                             src={img}
+                            onClick={() => setModal(true)}
                             onLoad={() => setLoading(false)}
                         ></img>
                     </figure>

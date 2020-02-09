@@ -9,6 +9,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -54,6 +55,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function FontSizeTheme() {
     const classes = useStyles();
+    const router = useRouter();
     return (
         <div className={classes.section} id="Events">
             <div className={classes.head}>
@@ -239,6 +241,9 @@ export default function FontSizeTheme() {
                                 <Button
                                     variant="contained"
                                     color="primary"
+                                    onClick={() =>
+                                        router.push("/megatreopuz/signIn")
+                                    }
                                     className={classes.button}
                                 >
                                     view website

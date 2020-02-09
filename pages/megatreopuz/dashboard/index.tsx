@@ -102,7 +102,7 @@ const Dashboard: NextPage<Props> = ({ viewer }) => {
                         <Paper
                             className={clsx(classes.paper, classes.paperButton)}
                             onClick={() =>
-                                router.push("/megatreopuz/dashboard/leader")
+                                router.push("/megatreopuz/dashboard/leaderboard")
                             }
                         >
                             <RankIcon className={classes.icon} color="action" />

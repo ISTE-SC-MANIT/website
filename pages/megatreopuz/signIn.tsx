@@ -37,7 +37,7 @@ const checkUser = (
         sameSite: "strict"
     });
     const email = googleUser.getBasicProfile().getEmail();
-    return fetch(`http://139.59.16.163:8000/authenticate`, {
+    return fetch(`${process.env.MEGATREOPUZ_SERVER}/authenticate`, {
         method: "POST",
         headers: {
             accept: "application/json",
@@ -155,7 +155,7 @@ const LoginPage: NextPage<PageProps> = ({
             // There is token that has not expired yet
             setLoading(true);
             const response = await fetch(
-                `http://139.59.16.163:8000/authenticateWithToken`,
+                `${process.env.MEGATREOPUZ_SERVER}/authenticateWithToken`,
                 {
                     method: "POST",
                     headers: {
@@ -207,7 +207,7 @@ const LoginPage: NextPage<PageProps> = ({
                     <Grid container item alignItems="center" justify="center">
                         <GoogleLogin
                             disabled={loading || pathLoading}
-                            clientId={process.env.CLIENT_ID}
+                            clientId={process.env.CLIENT_ID || " "}
                             onSuccess={async (
                                 googleUser:
                                     | GoogleLoginResponseOffline

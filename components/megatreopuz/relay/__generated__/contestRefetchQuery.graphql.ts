@@ -15,6 +15,8 @@ export type contestRefetchQuery = {
     readonly variables: contestRefetchQueryVariables;
 };
 
+
+
 /*
 query contestRefetchQuery {
   nextQuestion {
@@ -31,86 +33,85 @@ fragment contest_question on Question {
 */
 
 const node: ConcreteRequest = {
-    kind: "Request",
-    fragment: {
-        kind: "Fragment",
-        name: "contestRefetchQuery",
-        type: "Query",
-        metadata: null,
-        argumentDefinitions: [],
-        selections: [
-            {
-                kind: "LinkedField",
-                alias: null,
-                name: "nextQuestion",
-                storageKey: null,
-                args: null,
-                concreteType: "Question",
-                plural: false,
-                selections: [
-                    {
-                        kind: "FragmentSpread",
-                        name: "contest_question",
-                        args: null
-                    }
-                ]
-            }
+  "kind": "Request",
+  "fragment": {
+    "kind": "Fragment",
+    "name": "contestRefetchQuery",
+    "type": "Query",
+    "metadata": null,
+    "argumentDefinitions": [],
+    "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "nextQuestion",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "Question",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "FragmentSpread",
+            "name": "contest_question",
+            "args": null
+          }
         ]
-    },
-    operation: {
-        kind: "Operation",
-        name: "contestRefetchQuery",
-        argumentDefinitions: [],
-        selections: [
-            {
-                kind: "LinkedField",
-                alias: null,
-                name: "nextQuestion",
-                storageKey: null,
-                args: null,
-                concreteType: "Question",
-                plural: false,
-                selections: [
-                    {
-                        kind: "ScalarField",
-                        alias: null,
-                        name: "id",
-                        args: null,
-                        storageKey: null
-                    },
-                    {
-                        kind: "ScalarField",
-                        alias: null,
-                        name: "questionNo",
-                        args: null,
-                        storageKey: null
-                    },
-                    {
-                        kind: "ScalarField",
-                        alias: null,
-                        name: "imgUrl",
-                        args: null,
-                        storageKey: null
-                    },
-                    {
-                        kind: "ScalarField",
-                        alias: null,
-                        name: "description",
-                        args: null,
-                        storageKey: null
-                    }
-                ]
-            }
+      }
+    ]
+  },
+  "operation": {
+    "kind": "Operation",
+    "name": "contestRefetchQuery",
+    "argumentDefinitions": [],
+    "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "nextQuestion",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "Question",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "id",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "questionNo",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "imgUrl",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "description",
+            "args": null,
+            "storageKey": null
+          }
         ]
-    },
-    params: {
-        operationKind: "query",
-        name: "contestRefetchQuery",
-        id: null,
-        text:
-            "query contestRefetchQuery {\n  nextQuestion {\n    ...contest_question\n  }\n}\n\nfragment contest_question on Question {\n  id\n  questionNo\n  imgUrl\n  description\n}\n",
-        metadata: {}
-    }
+      }
+    ]
+  },
+  "params": {
+    "operationKind": "query",
+    "name": "contestRefetchQuery",
+    "id": null,
+    "text": "query contestRefetchQuery {\n  nextQuestion {\n    ...contest_question\n  }\n}\n\nfragment contest_question on Question {\n  id\n  questionNo\n  imgUrl\n  description\n}\n",
+    "metadata": {}
+  }
 };
-(node as any).hash = "1be2c6ae34903d06c1b93812c9dd8af2";
+(node as any).hash = '1be2c6ae34903d06c1b93812c9dd8af2';
 export default node;

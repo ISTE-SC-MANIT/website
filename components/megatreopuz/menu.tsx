@@ -1,5 +1,5 @@
-import React from "react";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import React from "react";
 import {
     AppBar,
     Toolbar,
@@ -21,7 +21,8 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import { useRouter } from "next/router";
 import FaceIcon from "@material-ui/icons/Face";
 import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
-
+import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
+import HelpIcon from "@material-ui/icons/Help";
 const useStyles = makeStyles((theme: Theme) => ({
     avatar: {
         background: theme.palette.secondary.main
@@ -60,6 +61,16 @@ const Config = [
         title: "Contest",
         icon: <SportsEsportsIcon />,
         path: "/megatreopuz/dashboard/contest"
+    },
+    {
+        title: "Leaderboard",
+        icon: <AssignmentIndIcon />,
+        path: "/megatreopuz/dashboard/leaderboard"
+    },
+    {
+        title: "Help",
+        icon: <HelpIcon />,
+        path: "/megatreopuz/dashboard/help"
     }
 ];
 
@@ -106,7 +117,10 @@ const Menu: React.FunctionComponent<Props> = ({ viewer, logout }) => {
                     {Config.map(({ title, icon, path }) => {
                         return (
                             <ListItem
-                                onClick={() => router.push(path)}
+                                onClick={() => {
+                                    router.push(path);
+                                    setOpen(false);
+                                }}
                                 selected={path === router.route}
                                 button
                                 key={title}

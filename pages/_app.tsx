@@ -254,11 +254,11 @@ const MyApp = ({
                                             logout={logout}
                                             viewer={props.viewer}
                                         />
-                                        <SubscriptionWrapper
+                                        {/* <SubscriptionWrapper
                                             environment={environment!}
                                             stateId={props.getState.id}
                                             showError={showError}
-                                        />
+                                        /> */}
                                         <Component
                                             state={props.getState}
                                             logout={logout}
