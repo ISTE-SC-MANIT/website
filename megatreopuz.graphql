@@ -1,78 +1,84 @@
 # source: http://localhost:8080/graphql
-# timestamp: Sun Feb 09 2020 23:03:40 GMT+0530 (India Standard Time)
+# timestamp: Sat May 16 2020 15:11:54 GMT+0530 (India Standard Time)
 
 type AnswerResponse implements Node {
-  id: String!
-  valid: Boolean!
+    id: String!
+    valid: Boolean!
 }
 
 type ContestState implements Node {
-  id: String!
-  active: Boolean!
+    id: String!
+    active: Boolean!
 }
 
 type LeaderBoardConnection {
-  edges: [UserEdge!]!
-  pageInfo: LeaderBoardPageInfo!
+    edges: [UserEdge!]!
+    pageInfo: LeaderBoardPageInfo!
 }
 
-"""this is scalar type of leaderboard cursor"""
+"""
+this is scalar type of leaderboard cursor
+"""
 scalar LeaderBoardCursorScalar
 
 type LeaderBoardPageInfo {
-  endCursor: LeaderBoardCursorScalar!
-  startCursor: LeaderBoardCursorScalar!
-  hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
+    endCursor: LeaderBoardCursorScalar!
+    startCursor: LeaderBoardCursorScalar!
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
 }
 
 type Mutation {
-  deleteUser: User!
-  updateUser(userInfo: UserInput!): User!
-  createQuestion(question: QuestionInput!): Question
-  updateQuestion(question: QuestionInput!): Question
-  deleteQuestion(input: QuestionNumberInput!): Question
-  answerQuestion(answer: String!): AnswerResponse
-  updateState(state: Boolean!): ContestState!
+    deleteUser: User!
+    updateUser(userInfo: UserInput!): User!
+    createQuestion(question: QuestionInput!): Question
+    updateQuestion(question: QuestionInput!): Question
+    deleteQuestion(input: QuestionNumberInput!): Question
+    answerQuestion(answer: String!): AnswerResponse
+    updateState(state: Boolean!): ContestState!
 }
 
 interface Node {
-  id: String!
+    id: String!
 }
 
 type Query {
-  viewer: User!
-  nextQuestion: Question
-  getState: ContestState!
-  leaderBoard(after: LeaderBoardCursorScalar, first: Int!): LeaderBoardConnection!
+    viewer: User!
+    nextQuestion: Question
+    getAllQuestion: [Question!]
+    getState: ContestState!
+    leaderBoard(
+        after: LeaderBoardCursorScalar
+        first: Int!
+    ): LeaderBoardConnection!
 }
 
 type Question implements Node {
-  id: String!
-  questionNo: Int!
-  description: String!
-  imgUrl: String!
+    id: String!
+    questionNo: Int!
+    description: String!
+    imgUrl: String!
 }
 
 input QuestionInput {
-  questionNo: Int!
-  description: String!
-  answer: String!
-  imgUrl: String!
+    questionNo: Int!
+    description: String!
+    answer: String
+    imgUrl: String!
 }
 
 input QuestionNumberInput {
-  questionNo: Int!
+    questionNo: Int!
 }
 
 type Rank implements Node {
-  id: String!
-  rank: Float!
+    id: String!
+    rank: Float!
 }
 
 type Subscription {
-  stateValue: ContestState!
-  rank: Int!
+    stateValue: ContestState!
+    rank: Int!
 }
 
 """
@@ -81,29 +87,29 @@ The javascript `Date` as integer. Type represents date and time as number of mil
 scalar Timestamp
 
 type User implements Node {
-  id: String!
-  userName: String!
-  name: String!
-  email: String!
-  phone: String!
-  college: String!
-  year: Int!
-  lastAnsweredQuestionTime: Timestamp!
-  country: String!
-  admin: Boolean!
-  lastAnsweredQuestion: Float!
-  totalQuestionsAnswered: Float!
-  rank: Rank
+    id: String!
+    userName: String!
+    name: String!
+    email: String!
+    phone: String!
+    college: String!
+    year: Int!
+    lastAnsweredQuestionTime: Timestamp!
+    country: String!
+    admin: Boolean!
+    lastAnsweredQuestion: Float!
+    totalQuestionsAnswered: Float!
+    rank: Rank
 }
 
 type UserEdge {
-  node: User!
-  cursor: LeaderBoardCursorScalar!
+    node: User!
+    cursor: LeaderBoardCursorScalar!
 }
 
 input UserInput {
-  college: String
-  phone: String
-  year: Float
-  country: String
+    college: String
+    phone: String
+    year: Float
+    country: String
 }

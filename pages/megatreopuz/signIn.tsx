@@ -19,6 +19,7 @@ import {
 } from "@material-ui/core";
 import cookie from "js-cookie";
 import { PageProps } from "../_app";
+import { backend } from "../../components/megatreopuz/backend";
 
 const checkUser = (
     googleUser: GoogleLoginResponseOffline | GoogleLoginResponse
@@ -37,7 +38,7 @@ const checkUser = (
         sameSite: "strict"
     });
     const email = googleUser.getBasicProfile().getEmail();
-    return fetch(`${process.env.MEGATREOPUZ_SERVER}/authenticate`, {
+    return fetch(`${backend}/authenticate`, {
         method: "POST",
         headers: {
             accept: "application/json",
@@ -154,17 +155,14 @@ const LoginPage: NextPage<PageProps> = ({
 
             // There is token that has not expired yet
             setLoading(true);
-            const response = await fetch(
-                `${process.env.MEGATREOPUZ_SERVER}/authenticateWithToken`,
-                {
-                    method: "POST",
-                    headers: {
-                        accept: "application/json",
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ token })
-                }
-            );
+            const response = await fetch(`${backend}/authenticateWithToken`, {
+                method: "POST",
+                headers: {
+                    accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ token })
+            });
             if (response.status !== 200) {
                 showError(
                     new Error(`${response.status}: ${response.statusText}`)
@@ -207,7 +205,10 @@ const LoginPage: NextPage<PageProps> = ({
                     <Grid container item alignItems="center" justify="center">
                         <GoogleLogin
                             disabled={loading || pathLoading}
-                            clientId={process.env.CLIENT_ID || " "}
+                            clientId={
+                                "65422568192-gsadmvg60atvtnpqvs3t0r43f213sgme.apps.googleusercontent.com" ||
+                                " "
+                            }
                             onSuccess={async (
                                 googleUser:
                                     | GoogleLoginResponseOffline

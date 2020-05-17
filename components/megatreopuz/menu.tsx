@@ -23,21 +23,24 @@ import FaceIcon from "@material-ui/icons/Face";
 import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import HelpIcon from "@material-ui/icons/Help";
+import theme from "./theme";
 const useStyles = makeStyles((theme: Theme) => ({
+    //theme.palette.secondary.main
     avatar: {
-        background: theme.palette.secondary.main
+        background: "red"
     },
+    //theme.palette.common.white
     rankButton: {
-        color: theme.palette.common.white
+        color: "white"
     },
     list: {
-        width: "20vw",
-        [theme.breakpoints.down("sm")]: {
-            width: "30vw"
-        },
-        [theme.breakpoints.down("xs")]: {
-            width: "70vw"
-        }
+        width: "20vw"
+        // [theme.breakpoints.down("sm")]: {
+        //     width: "30vw"
+        // },
+        // [theme.breakpoints.down("xs")]: {
+        //     width: "70vw"
+        // }
     }
 }));
 
