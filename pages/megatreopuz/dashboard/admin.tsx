@@ -165,19 +165,22 @@ const AdminPanel: NextPage<AdminPanelProps> = ({
     if (!environment) return null;
     const classes = useStyles();
     const [quiz, setQuiz] = React.useState(false);
-
-    React.useEffect(() => {
-        setQuiz(state.active);
-    }, [state]);
     const [questionNo, setQuestionNo] = React.useState(Number);
     const [imgUrl, setImgUrl] = React.useState("");
     const [answer, setAnswer] = React.useState("");
     const [description, setDescription] = React.useState("");
     const [success, setSuccess] = React.useState(false);
+    const [update, setUpdate] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
     const [successMessage, setSuccessMessage] = React.useState("");
+    const [delOpen, setDelOpen] = React.useState(false);
+
+    React.useEffect(() => {
+        setQuiz(state.active);
+    }, [state]);
+
     setLoading(false);
 
-    const [open, setOpen] = React.useState(false);
     const onClose = () => {
         setOpen(false);
     };
@@ -298,7 +301,6 @@ const AdminPanel: NextPage<AdminPanelProps> = ({
         );
     };
 
-    const [delOpen, setDelOpen] = React.useState(false);
     const handleDelClose = () => {
         setDelOpen(false);
     };
@@ -359,7 +361,6 @@ const AdminPanel: NextPage<AdminPanelProps> = ({
         });
         setQuiz(!quiz);
     };
-    const [update, setUpdate] = React.useState(false);
 
     const variables: QuestionInput = {
         questionNo,

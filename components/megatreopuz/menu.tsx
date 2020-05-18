@@ -12,9 +12,10 @@ import {
     ListItem,
     ListItemText,
     List,
-    ListItemIcon
+    ListItemIcon,
+    ThemeProvider
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { AppViewerQueryResponse } from "./relay/__generated__/AppViewerQuery.graphql";
 import MenuIcon from "@material-ui/icons/Menu";
 import DashboardIcon from "@material-ui/icons/Dashboard";
@@ -25,22 +26,20 @@ import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import HelpIcon from "@material-ui/icons/Help";
 import theme from "./theme";
 const useStyles = makeStyles((theme: Theme) => ({
-    //theme.palette.secondary.main
     avatar: {
-        background: "red"
+        background: theme.palette.secondary.main
     },
-    //theme.palette.common.white
     rankButton: {
-        color: "white"
+        color: theme.palette.common.white
     },
     list: {
-        width: "20vw"
-        // [theme.breakpoints.down("sm")]: {
-        //     width: "30vw"
-        // },
-        // [theme.breakpoints.down("xs")]: {
-        //     width: "70vw"
-        // }
+        width: "20vw",
+        [theme.breakpoints.down("sm")]: {
+            width: "30vw"
+        },
+        [theme.breakpoints.down("xs")]: {
+            width: "70vw"
+        }
     }
 }));
 
@@ -82,7 +81,7 @@ const Menu: React.FunctionComponent<Props> = ({ viewer, logout }) => {
     const [open, setOpen] = React.useState<boolean>(false);
     const router = useRouter();
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <AppBar position="sticky">
                 <Toolbar color="primary">
                     <Grid container alignItems="center" justify="space-between">
@@ -141,7 +140,7 @@ const Menu: React.FunctionComponent<Props> = ({ viewer, logout }) => {
                     </ListItem>
                 </List>
             </Drawer>
-        </>
+        </ThemeProvider>
     );
 };
 export default Menu;
