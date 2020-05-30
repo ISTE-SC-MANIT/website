@@ -14,9 +14,11 @@ import {
     Divider,
     Theme
 } from "@material-ui/core";
+
 import { useRouter } from "next/router";
 import cookie from "js-cookie";
 import { PageProps } from "../_app";
+import { backend } from "../../components/megatreopuz/backend";
 
 const initialValues = {
     username: "",
@@ -132,7 +134,7 @@ const CreateUser: NextPage<PageProps> = ({
                                         setLoading(false);
                                         return;
                                     }
-                                    fetch(`http://139.59.16.163:8000/signUp`, {
+                                    fetch(`${backend}/signUp`, {
                                         method: "POST",
                                         headers: {
                                             Accept: "application/json",

@@ -12,9 +12,10 @@ import {
     ListItem,
     ListItemText,
     List,
-    ListItemIcon
+    ListItemIcon,
+    ThemeProvider
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { AppViewerQueryResponse } from "./relay/__generated__/AppViewerQuery.graphql";
 import MenuIcon from "@material-ui/icons/Menu";
 import DashboardIcon from "@material-ui/icons/Dashboard";
@@ -23,6 +24,7 @@ import FaceIcon from "@material-ui/icons/Face";
 import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import HelpIcon from "@material-ui/icons/Help";
+import theme from "./theme";
 const useStyles = makeStyles((theme: Theme) => ({
     avatar: {
         background: theme.palette.secondary.main
@@ -79,7 +81,7 @@ const Menu: React.FunctionComponent<Props> = ({ viewer, logout }) => {
     const [open, setOpen] = React.useState<boolean>(false);
     const router = useRouter();
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <AppBar position="sticky">
                 <Toolbar color="primary">
                     <Grid container alignItems="center" justify="space-between">
@@ -138,7 +140,7 @@ const Menu: React.FunctionComponent<Props> = ({ viewer, logout }) => {
                     </ListItem>
                 </List>
             </Drawer>
-        </>
+        </ThemeProvider>
     );
 };
 export default Menu;
